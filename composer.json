@@ -1,0 +1,11 @@
+{
+    "name": "dgmike/one-day-as-a-lion",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Granados",
+            "email": "michaelgranados@gmail.com"
+        }
+    ],
+    "require": {}
+}
