@@ -9,7 +9,8 @@ Install
 ### Requiriments
 
 - PHP5.4
-- php-cli and php5-curl installed
+- curl (for composer.phar install)
+- php-cli
 - MySQL
 - node, npm and bower installed
 
