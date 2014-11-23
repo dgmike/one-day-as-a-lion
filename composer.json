@@ -7,5 +7,10 @@
             "email": "michaelgranados@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+      "slim/slim": "*",
+      "slim/views": "*",
+      "slim/strong": "*",
+      "slim/logger": "*"
+    }
 }
