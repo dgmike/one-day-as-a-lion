@@ -4,6 +4,7 @@
 help:
 	echo 'make help     - show this help'
 	echo 'make composer - installs composer'
+	echo 'make install  - installs project'
 
 check:
 	command -v curl >/dev/null 2>&1 || { echo >&2 "Please install curl or set it in your path. Aborting."; exit 1; }
