@@ -15,3 +15,9 @@ composer: check
 
 install: composer
 	php composer.phar install
+
+update: composer
+	php composer.phar update
+
+server:
+	php -S localhost:8080 app.php

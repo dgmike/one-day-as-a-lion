@@ -7,10 +7,17 @@
             "email": "michaelgranados@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "": ["App/", "Lib/"]
+        }
+    },
     "require": {
-      "slim/slim": "*",
-      "slim/views": "*",
-      "slim/strong": "*",
-      "slim/logger": "*"
+        "slim/slim": "*",
+        "slim/views": "*",
+        "slim/logger": "*",
+        "slim/strong": "dev-master",
+        "itsgoingd/slim-facades": "dev-master",
+        "twig/twig": "*"
     }
 }
