@@ -1,19 +1,27 @@
 <?php
 
 namespace Controllers;
+use SlimFacades\App;
 use SlimFacades\View;
+use SlimFacades\Response;
 use Strong\Strong;
 
 class Entrypoint
 {
 	use Controller;
 
-	public static function login()
+	static public function login()
 	{
 		$logged = Strong::getInstance()->loggedIn();
 		if ($logged) {
-			// redirect
+			Response::redirect('/');
 		}
 		View::display(self::template('login'));
+	}
+
+	static public function loginAction()
+	{
+		App::flash('loginerror', true);
+		Response::redirect('/');
 	}
 }
