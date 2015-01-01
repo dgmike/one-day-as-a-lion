@@ -47,6 +47,9 @@ class Configuration
 
 	public function setupDevelopment()
 	{
+		$_SERVER['SCRIPT_NAME'] = '/';
+		$_SERVER['PATH_INFO'] = __FILE__ . $_SERVER['REQUEST_URI'];
+
 		Config::set('mode', 'debug');
 		Config::set('debug', true);
 

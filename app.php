@@ -19,6 +19,7 @@ Configuration::getInstance()->setup(
 );
 
 // routing
-Route::get('/', 'Controllers\\Entrypoint:login')->name('login');
+Route::get('/',       'Controllers\\Entrypoint:login')->name('root');
+Route::post('/login', 'Controllers\\Entrypoint:loginAction')->name('login');
 
 App::run();
