@@ -18,6 +18,7 @@
         "slim/logger": "*",
         "slim/strong": "dev-master",
         "itsgoingd/slim-facades": "dev-master",
-        "twig/twig": "*"
+        "twig/twig": "*",
+        "rimelek/i18n": "dev-master"
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43442557c8bf7d94cd78a00de6b039ca",
+    "hash": "d2845391f2e87658a70bb6fe4a57fd6b",
     "packages": [
         {
             "name": "illuminate/support",
@@ -97,6 +97,40 @@
                 "slim"
             ],
             "time": "2014-12-03 23:53:31"
+        },
+        {
+            "name": "rimelek/i18n",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rimelek/i18n.git",
+                "reference": "3fcbfb857bcebeed2587e679553abea17b02dfce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rimelek/i18n/zipball/3fcbfb857bcebeed2587e679553abea17b02dfce",
+                "reference": "3fcbfb857bcebeed2587e679553abea17b02dfce",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rimelek\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Takács Ákos",
+                    "email": "rimelek@rimelek.hu",
+                    "homepage": "http://rimelek.hu"
+                }
+            ],
+            "description": "Library for multilingual PHP applications to choose a language",
+            "time": "2014-12-27 09:43:36"
         },
         {
             "name": "slim/logger",
@@ -345,7 +379,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "slim/strong": 20,
-        "itsgoingd/slim-facades": 20
+        "itsgoingd/slim-facades": 20,
+        "rimelek/i18n": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

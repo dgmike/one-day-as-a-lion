@@ -1,6 +1,7 @@
 <?php
 
 use SlimFacades\Facade;
+use Rimelek\I18n\Languages;
 
 class Configuration
 {
@@ -29,8 +30,19 @@ class Configuration
 		Facade::registerAliases();
 
 		// Configs
-		Config::set('view', new \Slim\Views\Twig());
-		Config::set('templates.path', 'App/Views');
+		$twig = new \Slim\Views\Twig();
+		$twig->parserExtensions = array(
+		    new \Slim\Views\TwigExtension(),
+		    new \Slim\Views\TwigExtraExtension(),
+		);
+
+		Config::set('view', $twig);
+		Config::set('templates.path', __DIR__ . '/Views');
+
+		// Languages
+		Config::set('language', 'pt-br');
+		Languages::setGlobalPath(__DIR__ . '/Languages');
+		Languages::setGlobalDefault(Config::get('language'));
 	}
 
 	public function setupDevelopment()

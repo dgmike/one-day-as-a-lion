@@ -3,26 +3,26 @@
 {% block content %}
 
 <div class="main-login">
-	<h1 class="ui dividing header">Entre no sistema</h1>
+	<h1 class="ui dividing header">{{ t('login-in-system') }}</h1>
 
-	<div class="ui message error">Usuário ou senha inválidos</div>
+	<div class="ui message error">{{ t('invalid-login-or-password') }}</div>
 
 	<form action="/" class="ui form">
 		<div class="field">
-			<label for="user">Usuário</label>
+			<label for="user">{{ t('user') }}</label>
 			<div class="ui icon input">
 				<input type="text">
 				<i class="user icon"></i>
 			</div>
 		</div>
 		<div class="required field">
-			<label>Senha</label>
+			<label>{{ t('password') }}</label>
 			<div class="ui icon input">
 				<input type="password">
 				<i class="lock icon"></i>
 			</div>
 		</div>
-		<button type="submit" class="ui primary button">Entrar</button>
+		<button type="submit" class="ui primary button">{{ t('login') }}</button>
 	</form>
 </div>
 
