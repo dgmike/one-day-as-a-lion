@@ -13,10 +13,13 @@ check:
 composer: check
 	if [ ! -f composer.phar ]; then curl -sS https://getcomposer.org/installer | php ; fi
 
-install: composer
+bowerinstall:
+	bower install
+
+install: composer bowerinstall
 	php composer.phar install
 
-update: composer
+update: composer bowerinstall
 	php composer.phar update
 
 server:
