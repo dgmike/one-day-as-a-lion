@@ -11,16 +11,16 @@
 
 	<form action="{{ siteUrl(urlFor('login')) }}" class="ui form" method="post">
 		<div class="field">
-			<label for="user">{{ t('user') }}</label>
+			<label for="username">{{ t('user') }}</label>
 			<div class="ui icon input">
-				<input type="text">
+				<input type="text" name="username" autofocus />
 				<i class="user icon"></i>
 			</div>
 		</div>
 		<div class="required field">
-			<label>{{ t('password') }}</label>
+			<label for="password">{{ t('password') }}</label>
 			<div class="ui icon input">
-				<input type="password">
+				<input type="password" name="password" />
 				<i class="lock icon"></i>
 			</div>
 		</div>

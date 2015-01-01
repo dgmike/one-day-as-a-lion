@@ -21,5 +21,6 @@ Configuration::getInstance()->setup(
 // routing
 Route::get('/',       'Controllers\\Entrypoint:login')->name('root');
 Route::post('/login', 'Controllers\\Entrypoint:loginAction')->name('login');
+Route::get('/logout', 'Controllers\\Entrypoint:logout')->name('logout');
 
 App::run();

@@ -1,3 +1,7 @@
+html, body {
+	height: auto;
+}
+
 .main-login {
 	margin: 5rem auto 0;
 	max-width: 30rem;
