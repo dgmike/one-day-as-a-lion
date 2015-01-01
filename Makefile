@@ -11,7 +11,7 @@ check:
 	command -v php >/dev/null 2>&1 || { echo >&2 "Please install php or set it in your path. Aborting."; exit 1; }
 
 composer: check
-	[[ -f composer.phar ]] || curl -sS https://getcomposer.org/installer | php
+	if [ ! -f composer.phar ]; then curl -sS https://getcomposer.org/installer | php ; fi
 
 install: composer
 	php composer.phar install
