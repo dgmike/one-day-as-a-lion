@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ t('title') }}</title>
+	<link rel="stylesheet" href="/public/components/semantic-ui/dist/semantic.min.css" />
+	<link rel="stylesheet" href="/public/main.css" />
+
+	<script src="/public/components/jquery/dist/jquery.min.js"></script>
+	<script src="/public/components/semantic-ui/dist/semantic.min.js"></script>
+</head>
+<body>
+
+<div class="ui celled middle aligned equal height grid app-header">
+	<div class="two wide column"><a href="#" class="ui button">05/2013</a></div>
+	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }}</h1></div>
+	<div class="two wide column right aligned"><a href="#" class="ui button">06/2013</a></div>
+</div>
+
+<h2 class="header">{{ t('entrance') }}</h2>
+
+{% block entrance %}{% endblock %}
+
+<hr class="ui divider" />
+
+<h2 class="header">{{ t('out') }}</h2>
+
+{% block out %}{% endblock %}
+
+</body>
+</html>

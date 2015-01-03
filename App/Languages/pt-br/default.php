@@ -5,3 +5,5 @@ $lang['invalid-login-or-password'] = 'Usuário ou senha inválidos';
 $lang['user'] = 'Usuário';
 $lang['password'] = 'Senha';
 $lang['login'] = 'Entrar';
+$lang['entrance'] = 'Entrada';
+$lang['out'] = 'Saída';

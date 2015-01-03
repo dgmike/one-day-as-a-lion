@@ -21,6 +21,12 @@ Configuration::getInstance()->setup(
 // routing
 Route::get('/',       'Controllers\\Entrypoint:login')->name('root');
 Route::post('/login', 'Controllers\\Entrypoint:loginAction')->name('login');
+Route::get('/:year-:month', 'Controllers\\Main:index')
+	->conditions(array(
+		'year'  => '[123]\d{3}',
+		'month' => '(0[1-9]|1[012])',
+	))
+	->name('main');
 Route::get('/logout', 'Controllers\\Entrypoint:logout')->name('logout');
 
 App::run();
