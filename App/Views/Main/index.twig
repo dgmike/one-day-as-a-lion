@@ -15,9 +15,27 @@
 {% endblock %}
 
 {% block entrance %}
+	<h2 class="header">
+		{{ t('entrance') }}
+		<a href="#" id="add-entrance" class="ui mini button right floated">
+			<i class="plus icon"></i> {{ t('add-entrance') }}
+		</a>
+	</h2>
     {{ include('shared/results.twig', {entries: entrances}) }}
 {% endblock %}
 
 {% block out %}
+	<h2 class="header">
+		{{ t('out') }}
+		<a href="#" id="add-out" class="ui mini button right floated">
+			<i class="plus icon"></i> {{ t('add-out') }}
+		</a>
+	</h2>
+	
     {{ include('shared/results.twig', {entries: outs}) }}
+{% endblock %}
+
+
+{% block footer %}
+	{% include 'shared/modal.twig' %}
 {% endblock %}

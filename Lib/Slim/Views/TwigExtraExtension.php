@@ -30,6 +30,6 @@ class TwigExtraExtension
 
     public function money($amount)
     {
-        return 'R$ ' . number_format(abs($amount), 2, ',', '.');
+        return money_format('%i', abs($amount));
     }
 }

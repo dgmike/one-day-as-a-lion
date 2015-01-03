@@ -21,14 +21,14 @@
 <br class="ui divider hidden clear" />
 
 <div class="container">
-	<h2 class="header">{{ t('entrance') }}</h2>
-	
 	{% block entrance %}{% endblock %}
-	
-	<h2 class="header">{{ t('out') }}</h2>
+
+	<div class="ui divider"></div>
 	
 	{% block out %}{% endblock %}
 </div>
+
+{% block footer %}{% endblock %}
 
 </body>
 </html>

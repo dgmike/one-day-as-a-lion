@@ -1,15 +1,15 @@
 {% if not entries %}
-<div class="ui warning message">Nenhum resultado encontrado</div>
+<div class="ui warning message">{{ t('no-results-found') }}</div>
 {% else %}
 <table class="ui compact table">
 	<thead>
 		<tr>
-    		<th class="one wide">Dia</th>
-    		<th class="six wide">Descrição</th>
-    		<th class="two wide">Valor Estimado</th>
-    		<th class="two wide">Valor Real</th>
-    		<th class="two wide">Estado</th>
-    		<th class="two wide">Ações</th>
+    		<th class="one wide">{{ t('day') }}</th>
+    		<th class="six wide">{{ t('description') }}</th>
+    		<th class="two wide">{{ t('estimated-amount') }}</th>
+    		<th class="two wide">{{ t('real-amount') }}</th>
+    		<th class="two wide">{{ t('status') }}</th>
+    		<th class="two wide">{{ t('actions') }}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,16 +18,16 @@
             <td>{{ entry.day }}</td>
             <td>{{ entry.description }}</td>
             <td>{{ money(entry.estimated) }}</td>
-            {% if not entry.real %}<td class="disabled">não definido</td>
-            {% else %}<td>R$ {{ entry.real }}</td>{% endif %}
+            {% if not entry.real %}<td class="disabled">{{ t('not-defined') }}</td>
+            {% else %}<td>{{ money(entry.real) }}</td>{% endif %}
             </td>
             <td>
-                {% if entry.status == 2 %}<span class="ui green label">já aconteceu</span>
-                {% else %}<span class="ui orange label">ainda não aconteceu</span>{% endif %}
+                {% if entry.status == 2 %}<span class="ui green label">{{ t('commited') }}</span>
+                {% else %}<span class="ui orange label">{{ t('not-commited') }}</span>{% endif %}
             </td>
             <td>
                 {% if entry.status != 2 %}
-                <button type="button" class="ui tiny compact button"><i class="ui check icon"></i> efetuar</button>
+                <button type="button" class="ui tiny compact button"><i class="ui check icon"></i> {{ t('commit') }}</button>
                 {% endif %}
             </td>
         </tr>
