@@ -17,6 +17,7 @@ class TwigExtraExtension
     {
         return array(
             new \Twig_SimpleFunction('t', array($this, 'translate')),
+            new \Twig_SimpleFunction('money', array($this, 'money')),
         );
     }
 
@@ -25,5 +26,10 @@ class TwigExtraExtension
         $languageCode = Config::get('language');
     	$language = Languages::getInstance();
     	return $language[$languageCode][$keyword];
+    }
+
+    public function money($amount)
+    {
+        return 'R$ ' . number_format(abs($amount), 2, ',', '.');
     }
 }

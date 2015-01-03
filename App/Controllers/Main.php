@@ -6,6 +6,7 @@ use DateTime;
 use DateInterval;
 use SlimFacades\Input;
 use SlimFacades\View;
+use Model;
 
 class Main
 {
@@ -23,6 +24,16 @@ class Main
 		$date->add(new DateInterval('P2M'));
 		$nextLinkData = array('year' => $date->format('Y'), 'month' => $date->format('m'));
 
-		View::display(self::template('index'), compact('currentLinkData', 'previousLinkData', 'nextLinkData'));
+		$entrances = Model::factory('Models\\Entry')
+			->where('year', (int) $year)
+			->where('month', (int) $month)
+			->whereGte('estimated', 0)
+			->findMany();
+
+		$variables = compact(
+			'currentLinkData', 'previousLinkData', 'nextLinkData',
+			'entrances', 'outs'
+		);
+		View::display(self::template('index'), $variables);
 	}
 }

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+{% set current_data_title %}{% block current_data_title %}{% endblock %}{% endset %}
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{ t('title') }}</title>
+	<title>{{ current_data_title }} - {{ t('title') }}</title>
 	<link rel="stylesheet" href="/public/components/semantic-ui/dist/semantic.min.css" />
 	<link rel="stylesheet" href="/public/main.css" />
 
@@ -13,23 +14,21 @@
 
 <div class="ui celled middle aligned equal height grid app-header">
 	<div class="two wide column">{% block previous_button %}{% endblock %}</div>
-	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }} {% block current_data_title %}
-	    
-	{% endblock %}</h1></div>
+	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }} &dash; {{ current_data_title }}</h1></div>
 	<div class="two wide column right aligned">{% block next_button %}{% endblock %}</div>
 </div>
 
-<h2 class="header">{{ t('entrance') }}</h2>
+<br class="ui divider hidden clear" />
 
-{% block entrance %}{% endblock %}
-
-<hr class="ui divider" />
-
-<h2 class="header">{{ t('out') }}</h2>
-
-{% block out %}{% endblock %}
-
-<hr class="ui divider" />
+<div class="container">
+	<h2 class="header">{{ t('entrance') }}</h2>
+	
+	{% block entrance %}{% endblock %}
+	
+	<h2 class="header">{{ t('out') }}</h2>
+	
+	{% block out %}{% endblock %}
+</div>
 
 </body>
 </html>

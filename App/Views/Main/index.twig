@@ -1,17 +1,23 @@
 {% extends 'App/main.twig' %}
 
-{% block current_data_title %}
-    {{ currentLinkData.month }}/{{ currentLinkData.year }}
-{% endblock %}
+{% block current_data_title %}{{ currentLinkData.month }}/{{ currentLinkData.year }}{% endblock %}
 
 {% block previous_button %}
-	<a href="{{  siteUrl(urlFor('main', previousLinkData)) }}" class="ui button">
+	<a href="{{  siteUrl(urlFor('main', previousLinkData)) }}" class="ui fluid button">
 		{{ previousLinkData.month }}/{{ previousLinkData.year }}
 	</a>
 {% endblock %}
 
 {% block next_button %}
-	<a href="{{  siteUrl(urlFor('main', nextLinkData)) }}" class="ui button">
+	<a href="{{  siteUrl(urlFor('main', nextLinkData)) }}" class="ui fluid button">
 		{{ nextLinkData.month }}/{{ nextLinkData.year }}
 	</a>
+{% endblock %}
+
+{% block entrance %}
+    {{ include('shared/results.twig', {entries: entrances}) }}
+{% endblock %}
+
+{% block out %}
+    {{ include('shared/results.twig', {entries: outs}) }}
 {% endblock %}

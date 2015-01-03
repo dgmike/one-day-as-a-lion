@@ -63,6 +63,9 @@ class Configuration
 				'michael' => 'michael',
 			),
 		));
+
+		$database = 'sqlite:' . dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database.sqlite';
+		Orm::configure($database);
 	}
 
 	public function setupProduction()

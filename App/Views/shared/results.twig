@@ -1,0 +1,37 @@
+{% if not entries %}
+<div class="ui warning message">Nenhum resultado encontrado</div>
+{% else %}
+<table class="ui compact table">
+	<thead>
+		<tr>
+    		<th class="one wide">Dia</th>
+    		<th class="six wide">Descrição</th>
+    		<th class="two wide">Valor Estimado</th>
+    		<th class="two wide">Valor Real</th>
+    		<th class="two wide">Estado</th>
+    		<th class="two wide">Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.day }}</td>
+            <td>{{ entry.description }}</td>
+            <td>{{ money(entry.estimated) }}</td>
+            {% if not entry.real %}<td class="disabled">não definido</td>
+            {% else %}<td>R$ {{ entry.real }}</td>{% endif %}
+            </td>
+            <td>
+                {% if entry.status == 2 %}<span class="ui green label">já aconteceu</span>
+                {% else %}<span class="ui orange label">ainda não aconteceu</span>{% endif %}
+            </td>
+            <td>
+                {% if entry.status != 2 %}
+                <button type="button" class="ui tiny compact button"><i class="ui check icon"></i> efetuar</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+	</tbody>
+</table>
+{% endif %}
