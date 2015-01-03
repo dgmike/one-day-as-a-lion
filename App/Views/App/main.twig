@@ -12,9 +12,11 @@
 <body>
 
 <div class="ui celled middle aligned equal height grid app-header">
-	<div class="two wide column"><a href="#" class="ui button">05/2013</a></div>
-	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }}</h1></div>
-	<div class="two wide column right aligned"><a href="#" class="ui button">06/2013</a></div>
+	<div class="two wide column">{% block previous_button %}{% endblock %}</div>
+	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }} {% block current_data_title %}
+	    
+	{% endblock %}</h1></div>
+	<div class="two wide column right aligned">{% block next_button %}{% endblock %}</div>
 </div>
 
 <h2 class="header">{{ t('entrance') }}</h2>
@@ -26,6 +28,8 @@
 <h2 class="header">{{ t('out') }}</h2>
 
 {% block out %}{% endblock %}
+
+<hr class="ui divider" />
 
 </body>
 </html>
