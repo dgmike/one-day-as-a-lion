@@ -31,17 +31,28 @@
 			<i class="plus icon"></i> {{ t('add-out') }}
 		</a>
 	</h2>
-	
+
     {{ include('shared/results.twig', {entries: outs}) }}
 {% endblock %}
 
+{% block header %}
+	<link rel="stylesheet" href="/public/components/formValidation/dist/css/formValidation.min.css" />
+
+	<link rel="stylesheet" href="/public/main.css" />
+{% endblock %}
 
 {% block footer %}
 	{% include 'shared/modal.twig' %}
 	{% include 'Main/add_entrance_form.twig' %}
 
 	<script src="/public/components/jquery/dist/jquery.min.js"></script>
+
 	<script src="/public/components/semantic-ui/dist/semantic.min.js"></script>
+
+	<script src="/public/components/formValidation/dist/js/formValidation.min.js"></script>
+	<script src="/public/components/formValidation/dist/js/framework/semantic.min.js"></script>
+	<script src="/public/components/formValidation/dist/js/language/pt_BR.js"></script>
+
 	<script src="/public/modal.js"></script>
 	<script src="/public/main.js"></script>
 {% endblock %}

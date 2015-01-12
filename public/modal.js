@@ -37,6 +37,9 @@
       },
       'modal': {
         'closable': false
+      },
+      'event': {
+        'show': function (elm) {}
       }
     };
   };
@@ -82,6 +85,10 @@
           actions: options.action,
           action: 'cancel'
         }, wrapButtonAction);
+    }
+
+    if (options.event.show) {
+      modalElement.modal('setting', 'onVisible', options.event.show);
     }
 
     $.each(options.modal, function (value, key) {

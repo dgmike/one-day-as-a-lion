@@ -5,7 +5,9 @@
   "use strict";
   var addEntrance, addEntranceAction;
 
-  addEntranceAction = function () {
+  // trigger formValidation
+  addEntranceAction = function (event) {
+    event.preventDefault();
     // TODO submit form
   };
 
@@ -17,6 +19,8 @@
     addEntranceForm = $('#add_entrance_form').clone();
     addEntranceForm.removeAttr('id');
 
+    // $(addEntranceForm).formValidation();
+
     modal.show({
       title: 'Adicionar Entrada',
       content: addEntranceForm,
@@ -24,6 +28,11 @@
       ok: 'Adicionar entrada!',
       action: {
         ok: addEntranceAction
+      },
+      event: {
+        show: function () {
+          $(this).find('form').formValidation({framework:'semantic'})
+        }
       }
     });
   };

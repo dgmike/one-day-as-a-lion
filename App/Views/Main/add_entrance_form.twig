@@ -1,37 +1,40 @@
 
 <div id="add_entrance_form" class="ui form">
-	<div class="field">
-		<label for="form-add-entrance-day">Dia</label>
-		<input type="number" name="entrance[add][day]" id="form-add-entrance-day" />
-	</div>
-
-	<div class="field">
-		<label for="form-add-entrance-description">Descrição</label>
-		<input type="text" name="entrance[add][description]" id="form-add-entrance-description" />
-	</div>
-
-	<div class="field">
-		<label for="form-add-entrance-estimated-amount">Estimado</label>
-		<div class="ui labeled input">
-			<div class="ui label">R$</div>
-			<input type="number" name="entrance[add][estimated-amount]" id="form-add-entrance-estimated-amount" step="any" />
+	<form action="">
+		<div class="field">
+			<label for="form-add-entrance-day">Dia</label>
+			<input type="number" name="entrance[add][day]" id="form-add-entrance-day" required="required" />
 		</div>
-	</div>
-
-	<div class="field">
-		<label for="form-add-entrance-real-amount">Valor Real</label>
-		<div class="ui labeled input">
-			<div class="ui label">R$</div>
-			<input type="number" name="entrance[add][real-amount]" id="form-add-entrance-real-amount" step="any" />
+	
+		<div class="field">
+			<label for="form-add-entrance-description">Descrição</label>
+			<input type="text" name="entrance[add][description]" id="form-add-entrance-description" required="required" />
 		</div>
-	</div>
+	
+		<div class="field">
+			<label for="form-add-entrance-estimated-amount">Estimado</label>
+			<div class="ui labeled input">
+				<div class="ui label">R$</div>
+				<input type="number" name="entrance[add][estimated-amount]" id="form-add-entrance-estimated-amount" step="any" required="required" />
+			</div>
+		</div>
+	
+		<div class="field">
+			<label for="form-add-entrance-real-amount">Valor Real</label>
+			<div class="ui labeled input">
+				<div class="ui label">R$</div>
+				<input type="number" name="entrance[add][real-amount]" id="form-add-entrance-real-amount" step="any" />
+			</div>
+		</div>
+	
+		<div class="field">
+			<label for="form-add-entrance-status">Estado</label>
+			<select name="entrance[add][status]" id="form-add-entrance-status" required="required">
+				<option value="1">Ainda não aconteceu</option>
+				<option value="2">Já aconteceu</option>
+			</select>
+		</div>
 
-	<div class="field">
-		<label for="form-add-entrance-status">Estado</label>
-		<select name="entrance[add][status]" id="form-add-entrance-status">
-			<option value="1">Ainda não aconteceu</option>
-			<option value="2">Já aconteceu</option>
-		</select>
-	</div>
-
+		<button type="submit">Salvar</button>
+	</form>
 </div>
