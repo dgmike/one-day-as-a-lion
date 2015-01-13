@@ -3,7 +3,7 @@
 	<form action="">
 		<div class="field">
 			<label for="form-add-entrance-day">Dia</label>
-			<input type="number" name="entrance[add][day]" id="form-add-entrance-day" required="required" />
+			<input type="number" name="entrance[add][day]" id="form-add-entrance-day" required="required" min="1" max="31" />
 		</div>
 	
 		<div class="field">
@@ -15,7 +15,7 @@
 			<label for="form-add-entrance-estimated-amount">Estimado</label>
 			<div class="ui labeled input">
 				<div class="ui label">R$</div>
-				<input type="number" name="entrance[add][estimated-amount]" id="form-add-entrance-estimated-amount" step="any" required="required" />
+				<input type="number" name="entrance[add][estimated-amount]" id="form-add-entrance-estimated-amount" step="any" required="required" min="0" />
 			</div>
 		</div>
 	
@@ -23,7 +23,7 @@
 			<label for="form-add-entrance-real-amount">Valor Real</label>
 			<div class="ui labeled input">
 				<div class="ui label">R$</div>
-				<input type="number" name="entrance[add][real-amount]" id="form-add-entrance-real-amount" step="any" />
+				<input type="number" name="entrance[add][real-amount]" id="form-add-entrance-real-amount" step="any" min="0" />
 			</div>
 		</div>
 	
@@ -34,7 +34,5 @@
 				<option value="2">Já aconteceu</option>
 			</select>
 		</div>
-
-		<button type="submit">Salvar</button>
 	</form>
 </div>

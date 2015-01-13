@@ -29,9 +29,16 @@
       action: {
         ok: addEntranceAction
       },
-      event: {
-        show: function () {
+      modal: {
+        onVisible: function () {
           $(this).find('form').formValidation({framework:'semantic'})
+        },
+        onApprove: function () {
+          var formValidation;
+          formValidation = $(this).find('form').data('formValidation');
+          formValidation.validate();
+          return formValidation.isValid();
+          debugger
         }
       }
     });

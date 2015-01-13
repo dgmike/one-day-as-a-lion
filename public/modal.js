@@ -37,9 +37,6 @@
       },
       'modal': {
         'closable': false
-      },
-      'event': {
-        'show': function (elm) {}
       }
     };
   };
@@ -87,11 +84,7 @@
         }, wrapButtonAction);
     }
 
-    if (options.event.show) {
-      modalElement.modal('setting', 'onVisible', options.event.show);
-    }
-
-    $.each(options.modal, function (value, key) {
+    $.each(options.modal, function (key, value) {
       modalElement.modal('setting', key, value);
     });
 
