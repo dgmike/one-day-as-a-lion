@@ -9,8 +9,11 @@ class Entry
 {
 	public static $_table = 'entries';
 
+	public $type = 'add';
+
 	public function assign($data)
 	{
+		$this->type = $data->type;
 		$this->year = $data->year;
 		$this->month = $data->month;
 		$this->day = $data->day;
@@ -38,5 +41,16 @@ class Entry
 		$entranceValidator->assert((object) $this->asArray());
 
 		return $this;
+	}
+
+	public function save()
+	{
+		if ('remove' === $this->type) {
+			$this->estimated = abs($this->estimated) * -1;
+			if ($this->real) {
+				$this->real = abs($this->real) * -1;
+			}
+		}
+		return parent::save();
 	}
 }
