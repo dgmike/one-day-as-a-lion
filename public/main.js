@@ -3,12 +3,46 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addEntranceAction;
+  var addEntrance, addEntranceAction, parseFormValidation;
+
+  parseFormValidation = function () {
+    var form = $('#form_add_entrance form'),
+      formValidation = form.data('formValidation');
+
+    return {
+      form: form,
+      formValidation: formValidation
+    }
+  };
+
+  // event to validate "real value or not"
+  $(document)
+    .on('change', '#form_add_entrance [name="entrance[add][status]"]', function () {
+      var formData = parseFormValidation(),
+        form = formData.form,
+        formValidation = formData.formValidation,
+        happened = (2 == $(this).val());
+
+      formValidation.enableFieldValidators('entrance[add][real-amount]', happened, 'notEmpty');
+      formValidation.revalidateField('entrance[add][real-amount]');
+    });
 
   // trigger formValidation
   addEntranceAction = function (event) {
+    var url = window.location.pathname,
+      formData = parseFormValidation(),
+      form = formData.form,
+      formValidation = formData.formValidation,
+      data = form.serialize();
+
     event.preventDefault();
-    // TODO submit form
+
+    formValidation.validate();
+    if (!formValidation.isValid()) {
+      return;
+    }
+
+    $.post(url, data);
   };
 
   addEntrance = function (event) {
@@ -17,7 +51,7 @@
     var addEntranceForm;
 
     addEntranceForm = $('#add_entrance_form').clone();
-    addEntranceForm.removeAttr('id');
+    addEntranceForm.removeAttr('id').attr('id', 'form_add_entrance');
 
     // $(addEntranceForm).formValidation();
 
