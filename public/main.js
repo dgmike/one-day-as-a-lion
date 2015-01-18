@@ -23,8 +23,8 @@
         formValidation = formData.formValidation,
         happened = (2 == $(this).val());
 
-      formValidation.enableFieldValidators('entrance[add][real-amount]', happened, 'notEmpty');
-      formValidation.revalidateField('entrance[add][real-amount]');
+      formValidation.enableFieldValidators('entrance[add][real]', happened, 'notEmpty');
+      formValidation.revalidateField('entrance[add][real]');
     });
 
   // trigger formValidation

@@ -9,6 +9,17 @@ class Entry
 {
 	public static $_table = 'entries';
 
+	public function assign($data)
+	{
+		$this->year = $data->year;
+		$this->month = $data->month;
+		$this->day = $data->day;
+		$this->description = $data->description;
+		$this->estimated = $data->estimated;
+		$this->real = $data->real;
+		$this->status = $data->status;
+	}
+
 	public function validate()
 	{
 		$entranceValidator = V::attribute('day', V::notEmpty()->int()->between(1, 31, true))

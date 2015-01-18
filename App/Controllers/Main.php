@@ -46,26 +46,20 @@ class Main
 		if (array_key_exists('add', $entrance) && is_array($entrance)) {
 			$add = (object) $entrance['add'];
 			$add->type = 'add';
+			$add->year = $year;
+			$add->month = $month;
 
 			try {
 				$entry = Model::factory('Models\\Entry')->create();
 
-				$entry->year = $year;
-				$entry->month = $month;
-				$entry->day = $add->day;
-				$entry->description = $add->description;
-				$entry->estimated = $add->{'estimated-amount'};
-				$entry->real = $add->{'real-amount'};
-				$entry->status = $add->status;
-
+				$entry->assign($add);
 				$entry->validate();
-
 				$entry->save();
 
 				App::flash('success', 'Entrada adicionada!');
 				Response::setStatus(200);
 			} catch (\Exception $e) {
-				App::flash('error', 'Ocorreram erros ao cadastrar adição');
+				App::flash('error', 'Ocorreram erros ao cadastrar entrada');
 				Response::setStatus(402);
 			}
 			return;
