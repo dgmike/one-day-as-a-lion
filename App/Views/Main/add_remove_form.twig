@@ -1,0 +1,38 @@
+
+<div id="add_remove_form" class="ui form">
+	<form action="">
+		<div class="field">
+			<label for="form-remove-entrance-day">Dia</label>
+			<input type="number" name="entrance[remove][day]" id="form-remove-entrance-day" required="required" min="1" max="31" />
+		</div>
+	
+		<div class="field">
+			<label for="form-remove-entrance-description">Descrição</label>
+			<input type="text" name="entrance[remove][description]" id="form-remove-entrance-description" required="required" />
+		</div>
+	
+		<div class="field">
+			<label for="form-remove-entrance-estimated">Estimado</label>
+			<div class="ui labeled input">
+				<div class="ui label">R$</div>
+				<input type="number" name="entrance[remove][estimated]" id="form-remove-entrance-estimated" step="any" required="required" min="0" />
+			</div>
+		</div>
+	
+		<div class="field">
+			<label for="form-remove-entrance-real">Valor Real</label>
+			<div class="ui labeled input">
+				<div class="ui label">R$</div>
+				<input type="number" name="entrance[remove][real]" id="form-remove-entrance-real" step="any" min="0" required="required" />
+			</div>
+		</div>
+	
+		<div class="field">
+			<label for="form-remove-entrance-status">Estado</label>
+			<select name="entrance[remove][status]" id="form-remove-entrance-status" required="required">
+				<option value="1">Ainda não aconteceu</option>
+				<option value="2">Já aconteceu</option>
+			</select>
+		</div>
+	</form>
+</div>

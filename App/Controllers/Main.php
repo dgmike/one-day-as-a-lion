@@ -32,6 +32,12 @@ class Main
 			->whereGte('estimated', 0)
 			->findMany();
 
+		$outs = Model::factory('Models\\Entry')
+			->where('year', (int) $year)
+			->where('month', (int) $month)
+			->whereLte('estimated', 0)
+			->findMany();
+
 		$variables = compact(
 			'currentLinkData', 'previousLinkData', 'nextLinkData',
 			'entrances', 'outs'

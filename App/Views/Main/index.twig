@@ -32,7 +32,7 @@
 {% block out %}
 	<h2 class="header">
 		{{ t('out') }}
-		<a href="#" id="add-out" class="ui mini button right floated">
+		<a href="#" id="add-remove" class="ui mini button right floated">
 			<i class="plus icon"></i> {{ t('add-out') }}
 		</a>
 	</h2>
@@ -49,6 +49,7 @@
 {% block footer %}
 	{% include 'shared/modal.twig' %}
 	{% include 'Main/add_entrance_form.twig' %}
+	{% include 'Main/add_remove_form.twig' %}
 
 	<script src="/public/components/jquery/dist/jquery.min.js"></script>
 

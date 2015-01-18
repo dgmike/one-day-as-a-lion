@@ -13,6 +13,6 @@
 	margin-top: 1rem;
 }
 
-#add_entrance_form {
+#add_entrance_form, #add_remove_form {
 	display: none;
 }

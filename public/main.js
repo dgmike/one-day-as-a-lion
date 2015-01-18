@@ -3,10 +3,10 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addEntranceAction, parseFormValidation;
+  var addEntrance, addEntranceAction, addOut, parseFormValidation;
 
   parseFormValidation = function () {
-    var form = $('#form_add_entrance form'),
+    var form = $('.modal form'),
       formValidation = form.data('formValidation');
 
     return {
@@ -17,7 +17,7 @@
 
   // event to validate "real value or not"
   $(document)
-    .on('change', '#form_add_entrance [name="entrance[add][status]"]', function () {
+    .on('change', '.modal [name="entrance[add][status]"]', function () {
       var formData = parseFormValidation(),
         form = formData.form,
         formValidation = formData.formValidation,
@@ -25,6 +25,15 @@
 
       formValidation.enableFieldValidators('entrance[add][real]', happened, 'notEmpty');
       formValidation.revalidateField('entrance[add][real]');
+    })
+    .on('change', '.modal [name="entrance[remove][status]"]', function () {
+      var formData = parseFormValidation(),
+        form = formData.form,
+        formValidation = formData.formValidation,
+        happened = (2 == $(this).val());
+
+      formValidation.enableFieldValidators('entrance[remove][real]', happened, 'notEmpty');
+      formValidation.revalidateField('entrance[remove][real]');
     });
 
   // trigger formValidation
@@ -81,6 +90,41 @@
     });
   };
 
+  addOut = function (event) {
+    event.preventDefault();
+
+    var addEntranceForm;
+
+    addEntranceForm = $('#add_remove_form').clone();
+    addEntranceForm.removeAttr('id').attr('id', 'form_add_remove');
+
+    // $(addEntranceForm).formValidation();
+
+    modal.show({
+      title: 'Adicionar Saída',
+      content: addEntranceForm,
+      cancel: 'Oops! Não quero adicionar saída',
+      ok: 'Adicionar saída!',
+      action: {
+        ok: addEntranceAction
+      },
+      modal: {
+        onVisible: function () {
+          $(this).find('form').formValidation({framework:'semantic'});
+          $('#form_add_remove [name="entrance[remove][status]"]').trigger('change');
+        },
+        onApprove: function () {
+          var formValidation;
+          formValidation = $(this).find('form').data('formValidation');
+          formValidation.validate();
+          return formValidation.isValid();
+          debugger
+        }
+      }
+    });
+  };
+
   $('#add-entrance').on('click', addEntrance);
+  $('#add-remove').on('click', addOut);
 
 }(window.jQuery));
