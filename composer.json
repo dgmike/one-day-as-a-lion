@@ -21,6 +21,7 @@
         "twig/twig": "*",
         "rimelek/i18n": "dev-master",
         "kevinsperrine/idiorm": "*",
-        "kevinsperrine/paris": "*"
+        "kevinsperrine/paris": "*",
+        "respect/validation": "0.7.*"
     }
 }

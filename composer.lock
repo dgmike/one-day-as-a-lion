@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ffa6374b30d2e219c6edd95f2496af4c",
+    "hash": "b99fb51734b8f2c0839c6cce0494cc0f",
     "packages": [
         {
             "name": "illuminate/support",
@@ -201,6 +201,62 @@
                 "paris"
             ],
             "time": "2012-10-25 05:03:00"
+        },
+        {
+            "name": "respect/validation",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Validation.git",
+                "reference": "e2bdab478b347f1a84da0981ac88b960a610ae45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/e2bdab478b347f1a84da0981ac88b960a610ae45",
+                "reference": "e2bdab478b347f1a84da0981ac88b960a610ae45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "symfony/validator": "~2.6",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "suggest": {
+                "ext-bcmath": "Arbitrary Precision Mathematics",
+                "ext-mbstring": "Multibyte String Functions"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\Validation\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Respect/Validation Contributors",
+                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP",
+            "homepage": "http://respect.li",
+            "keywords": [
+                "respect",
+                "validation",
+                "validator"
+            ],
+            "time": "2015-01-16 19:57:19"
         },
         {
             "name": "rimelek/i18n",

@@ -42,7 +42,9 @@
       return;
     }
 
-    $.post(url, data);
+    $.post(url, data, function () {
+      window.location.reload();
+    });
   };
 
   addEntrance = function (event) {
