@@ -50,11 +50,11 @@ class Main
 			$add->month = $month;
 
 			try {
-				$entry = Model::factory('Models\\Entry')->create();
-
-				$entry->assign($add);
-				$entry->validate();
-				$entry->save();
+				Model::factory('Models\\Entry')
+					->create()
+					->assign($add)
+					->validate()
+					->save();
 
 				App::flash('success', 'Entrada adicionada!');
 				Response::setStatus(200);

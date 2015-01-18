@@ -18,6 +18,8 @@ class Entry
 		$this->estimated = $data->estimated;
 		$this->real = $data->real;
 		$this->status = $data->status;
+
+		return $this;
 	}
 
 	public function validate()
@@ -34,5 +36,7 @@ class Entry
 		}
 
 		$entranceValidator->assert((object) $this->asArray());
+
+		return $this;
 	}
 }
