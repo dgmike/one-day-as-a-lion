@@ -9,7 +9,6 @@ use SlimFacades\Input;
 use SlimFacades\View;
 use SlimFacades\Response;
 use Model;
-use Respect\Validation\Validator as V;
 
 class Main
 {
@@ -42,27 +41,13 @@ class Main
 
 	static public function create($year, $month)
 	{
-		$entranceValidator = V::attribute('day', V::notEmpty()->int()->between(1, 31, true))
-							  ->attribute('description', V::notEmpty()->string())
-							  ->attribute('estimated-amount', V::notEmpty()->numeric()->positive())
-							  ->attribute('status', V::notEmpty()->int()->in(array(1, 2)));
-
-		$date = new DateTime("$year-$month");
 		$entrance = Input::post('entrance', false);
 
 		if (array_key_exists('add', $entrance) && is_array($entrance)) {
 			$add = (object) $entrance['add'];
 			$add->type = 'add';
 
-			if (2 == $add->status) {
-				$entranceValidator->attribute('real-amount', V::notEmpty()->numeric()->positive());
-			} else {
-				$entranceValidator->attribute('real-amount', V::numeric()->positive());
-			}
-
 			try {
-				$entranceValidator->assert((object) $add);
-
 				$entry = Model::factory('Models\\Entry')->create();
 
 				$entry->year = $year;
@@ -72,6 +57,8 @@ class Main
 				$entry->estimated = $add->{'estimated-amount'};
 				$entry->real = $add->{'real-amount'};
 				$entry->status = $add->status;
+
+				$entry->validate();
 
 				$entry->save();
 
