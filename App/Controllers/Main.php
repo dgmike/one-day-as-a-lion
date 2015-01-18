@@ -30,12 +30,14 @@ class Main
 			->where('year', (int) $year)
 			->where('month', (int) $month)
 			->whereGte('estimated', 0)
+			->orderByAsc('day')
 			->findMany();
 
 		$outs = Model::factory('Models\\Entry')
 			->where('year', (int) $year)
 			->where('month', (int) $month)
 			->whereLte('estimated', 0)
+			->orderByAsc('day')
 			->findMany();
 
 		$variables = compact(
