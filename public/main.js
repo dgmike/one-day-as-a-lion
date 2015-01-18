@@ -67,7 +67,8 @@
       },
       modal: {
         onVisible: function () {
-          $(this).find('form').formValidation({framework:'semantic'})
+          $(this).find('form').formValidation({framework:'semantic'});
+          $('#form_add_entrance [name="entrance[add][status]"]').trigger('change');
         },
         onApprove: function () {
           var formValidation;
