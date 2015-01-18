@@ -49,6 +49,7 @@ class Main
 
 		$date = new DateTime("$year-$month");
 		$entrance = Input::post('entrance', false);
+
 		if (array_key_exists('add', $entrance) && is_array($entrance)) {
 			$add = (object) $entrance['add'];
 			$add->type = 'add';
@@ -61,7 +62,19 @@ class Main
 
 			try {
 				$entranceValidator->assert((object) $add);
-				// @TODO store in database
+
+				$entry = Model::factory('Models\\Entry')->create();
+
+				$entry->year = $year;
+				$entry->month = $month;
+				$entry->day = $add->day;
+				$entry->description = $add->description;
+				$entry->estimated = $add->{'estimated-amount'};
+				$entry->real = $add->{'real-amount'};
+				$entry->status = $add->status;
+
+				$entry->save();
+
 				App::flash('success', 'Entrada adicionada!');
 				Response::setStatus(200);
 			} catch (\Exception $e) {
