@@ -43,26 +43,38 @@ class Main
 	{
 		$entrance = Input::post('entrance', false);
 
-		if (array_key_exists('add', $entrance) && is_array($entrance)) {
+		if (array_key_exists('add', $entrance) && is_array($entrance['add'])) {
 			$add = (object) $entrance['add'];
 			$add->type = 'add';
 			$add->year = $year;
 			$add->month = $month;
-
-			try {
-				Model::factory('Models\\Entry')
-					->create()
-					->assign($add)
-					->validate()
-					->save();
-
-				App::flash('success', 'Entrada adicionada!');
-				Response::setStatus(200);
-			} catch (\Exception $e) {
-				App::flash('error', 'Ocorreram erros ao cadastrar entrada');
-				Response::setStatus(402);
-			}
+			self::save($add);
 			return;
+		} elseif (array_key_exists('remove', $entrance) && is_array($entrance['remove'])) {
+			$remove = (object) $entrance['remove'];
+			$remove->type = 'remove';
+			$remove->year = $year;
+			$remove->month = $month;
+			self::save($remove);
+			return;
+		}
+		Response::setStatus(402);
+	}
+
+	static protected function save($data)
+	{
+		try {
+			Model::factory('Models\\Entry')
+				->create()
+				->assign($data)
+				->validate()
+				->save();
+
+			App::flash('success', 'Entrada adicionada!');
+			Response::setStatus(200);
+		} catch (\Exception $e) {
+			App::flash('error', 'Ocorreram erros ao cadastrar entrada');
+			Response::setStatus(402);
 		}
 	}
 }
