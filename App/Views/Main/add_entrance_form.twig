@@ -2,17 +2,17 @@
 <div id="add_entrance_form" class="ui form">
 	<form action="">
 		<div class="field">
-			<label for="form-add-entrance-day">Dia</label>
+			<label for="form-add-entrance-day">{{ t('day') }}</label>
 			<input type="number" name="entrance[add][day]" id="form-add-entrance-day" required="required" min="1" max="31" />
 		</div>
 	
 		<div class="field">
-			<label for="form-add-entrance-description">Descrição</label>
+			<label for="form-add-entrance-description">{{ t('description') }}</label>
 			<input type="text" name="entrance[add][description]" id="form-add-entrance-description" required="required" />
 		</div>
 	
 		<div class="field">
-			<label for="form-add-entrance-estimated">Estimado</label>
+			<label for="form-add-entrance-estimated">{{ t('estimated-amount') }}</label>
 			<div class="ui labeled input">
 				<div class="ui label">R$</div>
 				<input type="number" name="entrance[add][estimated]" id="form-add-entrance-estimated" step="any" required="required" min="0" />
@@ -20,7 +20,7 @@
 		</div>
 	
 		<div class="field">
-			<label for="form-add-entrance-real">Valor Real</label>
+			<label for="form-add-entrance-real">{{ t('real-amount') }}</label>
 			<div class="ui labeled input">
 				<div class="ui label">R$</div>
 				<input type="number" name="entrance[add][real]" id="form-add-entrance-real" step="any" min="0" required="required" />
@@ -28,10 +28,10 @@
 		</div>
 	
 		<div class="field">
-			<label for="form-add-entrance-status">Estado</label>
+			<label for="form-add-entrance-status">{{ t('status') }}</label>
 			<select name="entrance[add][status]" id="form-add-entrance-status" required="required">
-				<option value="1">Ainda não aconteceu</option>
-				<option value="2">Já aconteceu</option>
+				<option value="1">{{ t('not-commited') }}</option>
+				<option value="2">{{ t('commited') }}</option>
 			</select>
 		</div>
 	</form>
