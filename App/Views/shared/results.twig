@@ -14,7 +14,10 @@
 	</thead>
 	<tbody>
         {% for entry in entries %}
-        <tr>
+        <tr
+            data-id="{{ entry.id }}"
+            data-day="{{ entry.day }}"
+            data-estimated="{{ entry.real ? entry.real : entry.estimated }}">
             <td>{{ entry.day }}</td>
             <td>{{ entry.description }}</td>
             <td>{{ money(entry.estimated) }}</td>

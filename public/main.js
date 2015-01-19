@@ -3,7 +3,7 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addEntranceAction, addOut, parseFormValidation;
+  var addEntrance, addEntranceAction, addOut, parseFormValidation, commit, commitAction;
 
   parseFormValidation = function () {
     var form = $('.modal form'),
@@ -64,8 +64,6 @@
     addEntranceForm = $('#add_entrance_form').clone();
     addEntranceForm.removeAttr('id').attr('id', 'form_add_entrance');
 
-    // $(addEntranceForm).formValidation();
-
     modal.show({
       title: 'Adicionar Entrada',
       content: addEntranceForm,
@@ -84,7 +82,6 @@
           formValidation = $(this).find('form').data('formValidation');
           formValidation.validate();
           return formValidation.isValid();
-          debugger
         }
       }
     });
@@ -97,8 +94,6 @@
 
     addEntranceForm = $('#add_remove_form').clone();
     addEntranceForm.removeAttr('id').attr('id', 'form_add_remove');
-
-    // $(addEntranceForm).formValidation();
 
     modal.show({
       title: 'Adicionar Saída',
@@ -118,13 +113,67 @@
           formValidation = $(this).find('form').data('formValidation');
           formValidation.validate();
           return formValidation.isValid();
-          debugger
         }
       }
     });
   };
 
+  commitAction = function () {
+    var url = window.location.pathname,
+      formData = parseFormValidation(),
+      form = formData.form,
+      formValidation = formData.formValidation,
+      data = form.serialize();
+
+    event.preventDefault();
+
+    formValidation.validate();
+    if (!formValidation.isValid()) {
+      return;
+    }
+
+    $.post(url, data, function () {
+      window.location.reload();
+    });
+  };
+
+  commit = function (event) {
+    event.preventDefault();
+    var commitForm, rowData;
+
+    rowData = $(event.target).parents('tr').data();
+
+    commitForm = $('#commit_form').clone();
+    commitForm.removeAttr('id').attr('id', 'form_commit');
+    commitForm.find('input[name="commit[id]"]').val(rowData.id);
+    commitForm.find('input[name="commit[day]"]').val(rowData.day);
+    commitForm.find('input[name="commit[real]"]').val(rowData.estimated);
+
+    modal.show({
+      title: 'Efetuar transação',
+      content: commitForm,
+      cancel: 'Não quero efetuar!',
+      ok: 'Efetue a transação',
+      action: {
+        ok: commitAction
+      },
+      modal: {
+        onVisible: function () {
+          $(this).find('form').formValidation({framework:'semantic'});
+        },
+        onApprove: function () {
+          var formValidation;
+          formValidation = $(this).find('form').data('formValidation');
+          formValidation.validate();
+          return formValidation.isValid();
+        }
+      }
+    });
+
+  };
+
   $('#add-entrance').on('click', addEntrance);
   $('#add-remove').on('click', addOut);
+  $('.commit-button').on('click', commit);
 
 }(window.jQuery));
