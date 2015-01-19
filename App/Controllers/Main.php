@@ -51,19 +51,21 @@ class Main
 	{
 		$entrance = Input::post('entrance', false);
 
+		$entry = Model::factory('Models\\Entry')->create();
+
 		if (array_key_exists('add', $entrance) && is_array($entrance['add'])) {
 			$add = (object) $entrance['add'];
 			$add->type = 'add';
 			$add->year = $year;
 			$add->month = $month;
-			self::save($add);
+			self::save($entry, $add);
 			return;
 		} elseif (array_key_exists('remove', $entrance) && is_array($entrance['remove'])) {
 			$remove = (object) $entrance['remove'];
 			$remove->type = 'remove';
 			$remove->year = $year;
 			$remove->month = $month;
-			self::save($remove);
+			self::save($entry, $remove);
 			return;
 		}
 		Response::setStatus(402);
@@ -76,31 +78,28 @@ class Main
 			$entry = Model::factory('Models\\Entry')
 				->whereEqual('id', (int) $commit['id'])
 				->findOne();
+
 			$commit['status'] = 2;
 
-			$entry->assign((object) $commit)->validate()->save();
-
-			Response::setStatus(200);
+			self::save($entry, (object) $commit);
 			return;
 		}
 		Response::setStatus(402);
 	}
 
-	static protected function save($data)
+	static protected function save($entry, \stdClass $data)
 	{
 		try {
-			Model::factory('Models\\Entry')
-				->create()
+			$entry
 				->assign($data)
 				->validate()
 				->save();
 
-			App::flash('success', 'Entrada adicionada!');
+			App::flash('success', 'Dados salvos com sucesso!');
 			Response::setStatus(200);
 		} catch (\Exception $e) {
-			App::flash('error', 'Ocorreram erros ao cadastrar entrada');
+			App::flash('error', 'Ocorreram erros ao salvar entrada');
 			Response::setStatus(402);
 		}
 	}
-
 }
