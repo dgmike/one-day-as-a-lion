@@ -13,14 +13,16 @@ class Entry
 
 	public function assign($data)
 	{
-		$this->type = $data->type;
-		$this->year = $data->year;
-		$this->month = $data->month;
-		$this->day = $data->day;
-		$this->description = $data->description;
-		$this->estimated = $data->estimated;
-		$this->real = $data->real;
-		$this->status = $data->status;
+		$attributes = array(
+			'type', 'year', 'month', 'day', 'description',
+			'estimated', 'real', 'status'
+		);
+		
+		foreach ($attributes as $attribute) {
+			if (isset($data->{$attribute})) {
+				$this->{$attribute} = $data->{$attribute};
+			}
+		}
 
 		return $this;
 	}
