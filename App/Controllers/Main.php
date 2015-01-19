@@ -69,6 +69,23 @@ class Main
 		Response::setStatus(402);
 	}
 
+	static public function update($year, $month)
+	{
+		$commit = Input::post('commit', false);
+		if ($commit) {
+			$entry = Model::factory('Models\\Entry')
+				->whereEqual('id', (int) $commit['id'])
+				->findOne();
+			$entry->status = 2;
+			$entry->day = $commit['day'];
+			$entry->real = $commit['real'];
+			$entry->save();
+			Response::setStatus(200);
+			return;
+		}
+		Response::setStatus(402);
+	}
+
 	static protected function save($data)
 	{
 		try {
@@ -85,4 +102,5 @@ class Main
 			Response::setStatus(402);
 		}
 	}
+
 }
