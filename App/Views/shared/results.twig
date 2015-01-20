@@ -13,7 +13,13 @@
 		</tr>
 	</thead>
 	<tbody>
+        {% set totalEstimated = 0 %}
+        {% set totalReal = 0 %}
+
         {% for entry in entries %}
+
+        {% set totalEstimated = totalEstimated + entry.estimated %}
+        {% set totalReal = totalReal + entry.real %}
         <tr
             data-id="{{ entry.id }}"
             data-day="{{ entry.day }}"
@@ -39,5 +45,13 @@
         </tr>
         {% endfor %}
 	</tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2">Total</th>
+            <th>{{ money(totalEstimated) }}</th>
+            <th>{{ money(totalReal) }}</th>
+            <th colspan="2"></th>
+        </tr>
+    </tfoot>
 </table>
 {% endif %}
