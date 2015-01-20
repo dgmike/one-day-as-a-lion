@@ -147,7 +147,7 @@
     commitForm.removeAttr('id').attr('id', 'form_commit');
     commitForm.find('input[name="commit[id]"]').val(rowData.id);
     commitForm.find('input[name="commit[day]"]').val(rowData.day);
-    commitForm.find('input[name="commit[real]"]').val(rowData.estimated);
+    commitForm.find('input[name="commit[real]"]').val(Math.abs(rowData.estimated));
 
     modal.show({
       title: 'Efetuar transação',
