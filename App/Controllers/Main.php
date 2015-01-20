@@ -87,6 +87,20 @@ class Main
 		Response::setStatus(402);
 	}
 
+	static public function remove($year, $month)
+	{
+		$id = Input::post('id', false);
+		if ($id) {
+			$entry = Model::factory('Models\\Entry')
+				->whereEqual('id', (int) $id)
+				->findOne();
+			$entry->delete();
+			App::flash('success', 'Entrada removida com sucesso!');
+			return;
+		}
+		Response::setStatus(402);
+	}
+
 	static protected function save($entry, \stdClass $data)
 	{
 		try {

@@ -3,7 +3,7 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addEntranceAction, addOut, parseFormValidation, commit, commitAction;
+  var addEntrance, addEntranceAction, addOut, parseFormValidation, commit, commitAction, remove;
 
   parseFormValidation = function () {
     var form = $('.modal form'),
@@ -172,8 +172,29 @@
 
   };
 
+  remove = function (event) {
+    var id, data;
+    event.preventDefault();
+
+    if (!confirm('Tem certeza que deseja remover esta entrada?')) {
+      return;
+    }
+
+    id = $(event.target).parents('tr').data('id');
+
+    data = {
+      "_METHOD": "DELETE",
+      "id": id
+    };
+
+    $.post(window.location.pathname, data, function () {
+      window.location.reload();
+    });
+  };
+
   $('#add-entrance').on('click', addEntrance);
   $('#add-remove').on('click', addOut);
   $('.commit-button').on('click', commit);
+  $('.remove-button').on('click', remove);
 
 }(window.jQuery));
