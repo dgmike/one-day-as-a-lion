@@ -12,7 +12,16 @@
 
 <div class="ui celled middle aligned equal height grid app-header">
 	<div class="two wide column">{% block previous_button %}{% endblock %}</div>
-	<div class="twelve wide column"><h1 class="ui center aligned large header">{{ t('title') }} &dash; {{ current_data_title }}</h1></div>
+	<div class="twelve wide center aligned column">
+		<h1 class="ui large header">
+			{{ t('title') }}
+			&dash;
+			{{ current_data_title }}
+		</h1>
+		<div class="ui buttons">
+			<a href="/logout" class="ui icon tiny button"><i class="icon sign out"></i></a>
+		</div>
+	</div>
 	<div class="two wide column right aligned">{% block next_button %}{% endblock %}</div>
 </div>
 
