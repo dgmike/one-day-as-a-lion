@@ -94,6 +94,10 @@ class Main
 				->whereEqual('id', (int) $commit['id'])
 				->findOne();
 
+			if ($entry->estimated < 0) {
+				$entry->type = 'remove';
+			}
+
 			$commit['status'] = 2;
 
 			self::save($entry, (object) $commit);
