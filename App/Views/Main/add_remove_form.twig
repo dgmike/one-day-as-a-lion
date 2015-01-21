@@ -14,7 +14,7 @@
 		<div class="field">
 			<label for="form-remove-entrance-estimated">{{ t('estimated-amount') }}</label>
 			<div class="ui labeled input">
-				<div class="ui label">R$</div>
+				<div class="ui label">{{ t('currency-prefix') }}</div>
 				<input type="number" name="entrance[remove][estimated]" id="form-remove-entrance-estimated" step="any" required="required" min="0" />
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 		<div class="field">
 			<label for="form-remove-entrance-real">{{ t('real-amount') }}</label>
 			<div class="ui labeled input">
-				<div class="ui label">R$</div>
+				<div class="ui label">{{ t('currency-prefix') }}</div>
 				<input type="number" name="entrance[remove][real]" id="form-remove-entrance-real" step="any" min="0" required="required" />
 			</div>
 		</div>

@@ -11,6 +11,8 @@ $lang['add-entrance'] = 'Adicionar Entrada';
 $lang['add-out'] = 'Adicionar Saída';
 
 // results
+$lang['currency-prefix'] = 'R$';
+
 $lang['no-results-found'] = 'Nenhum resultado encontrado';
 $lang['day'] = 'Dia';
 $lang['description'] = 'Descrição';
