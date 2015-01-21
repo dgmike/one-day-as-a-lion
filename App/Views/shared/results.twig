@@ -22,7 +22,7 @@
             <td>{{ entry.description }}</td>
             <td>{{ money(entry.estimated) }}</td>
             {% if not entry.real %}<td class="disabled">{{ t('not-defined') }}</td>
-            {% else %}<td>{{ money(entry.real) }}</td>{% endif %}
+            {% else %}<td class="{% if entry.status != 2 %}disabled{% endif %}">{{ money(entry.real) }}</td>{% endif %}
             </td>
             <td>
                 {% if entry.status == 2 %}<span class="ui green label">{{ t('commited') }}</span>

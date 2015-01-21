@@ -46,11 +46,11 @@ class Main
 		$sums = array(
 			'entrance' => array(
 				'estimated' => $modelEntrance->sum('estimated'),
-				'real' => $modelEntrance->sum('real')
+				'real' => $modelEntrance->where('status', 2)->sum('real')
 			),
 			'out' => array(
 				'estimated' => $modelOut->sum('estimated'),
-				'real' => $modelOut->sum('real')
+				'real' => $modelOut->where('status', 2)->sum('real')
 			),
 		);
 
