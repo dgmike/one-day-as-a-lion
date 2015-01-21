@@ -26,24 +26,39 @@ class Main
 		$date->add(new DateInterval('P2M'));
 		$nextLinkData = array('year' => $date->format('Y'), 'month' => $date->format('m'));
 
-		$entrances = Model::factory('Models\\Entry')
+		$modelEntrance = Model::factory('Models\\Entry');
+		$modelOut = Model::factory('Models\\Entry');
+
+		$entrances = $modelEntrance
 			->where('year', (int) $year)
 			->where('month', (int) $month)
 			->whereGte('estimated', 0)
 			->orderByAsc('day')
 			->findMany();
 
-		$outs = Model::factory('Models\\Entry')
+		$outs = $modelOut
 			->where('year', (int) $year)
 			->where('month', (int) $month)
-			->whereLte('estimated', 0)
+			->whereLt('estimated', 0)
 			->orderByAsc('day')
 			->findMany();
 
+		$sums = array(
+			'entrance' => array(
+				'estimated' => $modelEntrance->sum('estimated'),
+				'real' => $modelEntrance->sum('real')
+			),
+			'out' => array(
+				'estimated' => $modelOut->sum('estimated'),
+				'real' => $modelOut->sum('real')
+			),
+		);
+
 		$variables = compact(
 			'currentLinkData', 'previousLinkData', 'nextLinkData',
-			'entrances', 'outs'
+			'entrances', 'outs', 'sums'
 		);
+
 		View::display(self::template('index'), $variables);
 	}
 
