@@ -28,8 +28,11 @@ class TwigExtraExtension
     	return $language[$languageCode][$keyword];
     }
 
-    public function money($amount)
+    public function money($amount, $realAmount = false)
     {
-        return money_format('%i', abs($amount));
+        if (false === $realAmount) {
+            $amount = abs($amount);
+        }
+        return money_format('%i', $amount);
     }
 }
