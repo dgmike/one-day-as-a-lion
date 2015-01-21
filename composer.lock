@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b99fb51734b8f2c0839c6cce0494cc0f",
+    "hash": "a211b1f0bdba14e0fdaff6f6ba7cbc2e",
     "packages": [
         {
             "name": "illuminate/support",
@@ -99,17 +99,17 @@
             "time": "2014-12-03 23:53:31"
         },
         {
-            "name": "kevinsperrine/idiorm",
-            "version": "v2.1.3",
+            "name": "j4mie/idiorm",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kevinsperrine/idiorm.git",
-                "reference": "9ebf5a8cf56b178903f823a344c163b703c65019"
+                "url": "https://github.com/j4mie/idiorm.git",
+                "reference": "b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevinsperrine/idiorm/zipball/9ebf5a8cf56b178903f823a344c163b703c65019",
-                "reference": "9ebf5a8cf56b178903f823a344c163b703c65019",
+                "url": "https://api.github.com/repos/j4mie/idiorm/zipball/b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf",
+                "reference": "b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf",
                 "shasum": ""
             },
             "require": {
@@ -117,16 +117,23 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Idiorm": "src/",
-                    "Orm": "src/"
-                }
+                "classmap": [
+                    "idiorm.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
             ],
             "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
                 {
                     "name": "Jamie Matthews",
                     "email": "jamie.matthews@gmail.com",
@@ -134,51 +141,58 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Kevin Perrine",
-                    "email": "kperrine@gmail.com",
-                    "homepage": "http://kevinperrine.com",
-                    "role": "Developer"
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
                 }
             ],
-            "description": "Completely refactored, PSR compliant, version of Idiorm: a lightweight nearly-zero-configuration object-relational mapper and fluent query builder for PHP5.",
-            "homepage": "https://github.com/kevinsperrine/idiorm",
+            "description": "A lightweight nearly-zero-configuration object-relational mapper and fluent query builder for PHP5",
+            "homepage": "http://j4mie.github.com/idiormandparis",
             "keywords": [
                 "idiorm",
-                "orm"
+                "orm",
+                "query builder"
             ],
-            "time": "2012-10-24 21:34:51"
+            "time": "2014-06-23 13:08:57"
         },
         {
-            "name": "kevinsperrine/paris",
-            "version": "v2.0.3",
+            "name": "j4mie/paris",
+            "version": "v1.5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kevinsperrine/paris.git",
-                "reference": "241e63ab41123053a0f9b7ea1beb6dd1b6941521"
+                "url": "https://github.com/j4mie/paris.git",
+                "reference": "6cd7a3d8ffb721068dd58e508a8121b92b4068b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevinsperrine/paris/zipball/241e63ab41123053a0f9b7ea1beb6dd1b6941521",
-                "reference": "241e63ab41123053a0f9b7ea1beb6dd1b6941521",
+                "url": "https://api.github.com/repos/j4mie/paris/zipball/6cd7a3d8ffb721068dd58e508a8121b92b4068b8",
+                "reference": "6cd7a3d8ffb721068dd58e508a8121b92b4068b8",
                 "shasum": ""
             },
             "require": {
-                "kevinsperrine/idiorm": ">=2.0.0",
+                "j4mie/idiorm": "1.5.*",
                 "php": ">=5.2.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "OrmWrapper": "src/",
-                    "Paris": "src/",
-                    "Model": "src/"
-                }
+                "classmap": [
+                    "paris.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
             ],
             "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
                 {
                     "name": "Jamie Matthews",
                     "email": "jamie.matthews@gmail.com",
@@ -186,34 +200,34 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Kevin Perrine",
-                    "email": "kperrine@gmail.com",
-                    "homepage": "http://kevinperrine.com",
-                    "role": "Developer"
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
                 }
             ],
-            "description": "Completely refactored, PSR compliant, version of Paris: A lightweight Active Record implementation for PHP5, built on top of Idiorm.",
-            "homepage": "https://github.com/kevinsperrine/paris",
+            "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
+            "homepage": "http://j4mie.github.com/idiormandparis",
             "keywords": [
-                "active-record",
-                "idiorm",
+                "Active Record",
+                "model",
                 "orm",
                 "paris"
             ],
-            "time": "2012-10-25 05:03:00"
+            "time": "2014-09-23 10:49:36"
         },
         {
             "name": "respect/validation",
-            "version": "0.7.2",
+            "version": "0.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "e2bdab478b347f1a84da0981ac88b960a610ae45"
+                "reference": "cbd06954c2e561209afdd76984ab8a3399af501f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/e2bdab478b347f1a84da0981ac88b960a610ae45",
-                "reference": "e2bdab478b347f1a84da0981ac88b960a610ae45",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/cbd06954c2e561209afdd76984ab8a3399af501f",
+                "reference": "cbd06954c2e561209afdd76984ab8a3399af501f",
                 "shasum": ""
             },
             "require": {
@@ -256,7 +270,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-01-16 19:57:19"
+            "time": "2015-01-19 23:08:17"
         },
         {
             "name": "rimelek/i18n",
@@ -478,16 +492,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.16.3",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af"
+                "reference": "2493970fa4d587eca73f77e6d8bd48a8bdd4c608"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/2493970fa4d587eca73f77e6d8bd48a8bdd4c608",
+                "reference": "2493970fa4d587eca73f77e6d8bd48a8bdd4c608",
                 "shasum": ""
             },
             "require": {
@@ -496,7 +510,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -531,7 +545,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-12-25 19:58:19"
+            "time": "2015-01-14 10:15:49"
         }
     ],
     "packages-dev": [],

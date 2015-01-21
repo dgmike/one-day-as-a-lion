@@ -20,8 +20,8 @@
         "itsgoingd/slim-facades": "dev-master",
         "twig/twig": "*",
         "rimelek/i18n": "dev-master",
-        "kevinsperrine/idiorm": "*",
-        "kevinsperrine/paris": "*",
+        "j4mie/idiorm": "*",
+        "j4mie/paris": "*",
         "respect/validation": "0.7.*"
     }
 }

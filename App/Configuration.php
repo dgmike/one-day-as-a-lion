@@ -66,7 +66,8 @@ class Configuration
 		));
 
 		$database = 'sqlite:' . dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database.sqlite';
-		Orm::configure($database);
+		ORM::configure($database);
+		ORM::configure('logging', true);
 	}
 
 	public function setupProduction()
