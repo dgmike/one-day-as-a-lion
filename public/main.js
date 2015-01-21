@@ -65,10 +65,10 @@
     addEntranceForm.removeAttr('id').attr('id', 'form_add_entrance');
 
     modal.show({
-      title: 'Adicionar Entrada',
+      title: i18n._('add-entrance'),
       content: addEntranceForm,
-      cancel: 'Oops! Cancele minha ação',
-      ok: 'Adicionar entrada!',
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
       action: {
         ok: addEntranceAction
       },
@@ -96,10 +96,10 @@
     addEntranceForm.removeAttr('id').attr('id', 'form_add_remove');
 
     modal.show({
-      title: 'Adicionar Saída',
+      title: i18n._('add-out'),
       content: addEntranceForm,
-      cancel: 'Oops! Não quero adicionar saída',
-      ok: 'Adicionar saída!',
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
       action: {
         ok: addEntranceAction
       },
@@ -150,10 +150,10 @@
     commitForm.find('input[name="commit[real]"]').val(Math.abs(rowData.estimated));
 
     modal.show({
-      title: 'Efetuar transação',
+      title: i18n._('commit-transaction'),
       content: commitForm,
-      cancel: 'Não quero efetuar!',
-      ok: 'Efetue a transação',
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
       action: {
         ok: commitAction
       },
@@ -176,7 +176,7 @@
     var id, data;
     event.preventDefault();
 
-    if (!confirm('Tem certeza que deseja remover esta entrada?')) {
+    if (!confirm(i18n._('confirm-remove-transaction'))) {
       return;
     }
 

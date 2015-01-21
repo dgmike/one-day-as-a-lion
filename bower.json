@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "semantic-ui": "~1.5.0",
-    "formValidation": "formvalidation/formvalidation#master"
+    "formValidation": "formvalidation/formvalidation#master",
+    "i18n": "*"
   }
 }

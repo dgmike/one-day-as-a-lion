@@ -16,12 +16,20 @@ class TwigExtraExtension
     public function getFunctions()
     {
         return array(
+            new \Twig_SimpleFunction('translations', array($this, 'translations')),
             new \Twig_SimpleFunction('t', array($this, 'translate')),
             new \Twig_SimpleFunction('money', array($this, 'money')),
         );
     }
 
-    public function translate($keyword = '', array $params = array())
+    public function translations()
+    {
+        $languageCode = Config::get('language');
+        $language = Languages::getInstance();
+        return json_encode($language[$languageCode]);
+    }
+
+    public function translate($keyword = '')
     {
         $languageCode = Config::get('language');
     	$language = Languages::getInstance();
