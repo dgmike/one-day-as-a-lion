@@ -12,6 +12,7 @@ $lang['add-out'] = 'Adicionar Saída';
 
 // results
 $lang['currency-prefix'] = 'R$';
+$lang['total'] = 'Total';
 
 $lang['no-results-found'] = 'Nenhum resultado encontrado';
 $lang['day'] = 'Dia';

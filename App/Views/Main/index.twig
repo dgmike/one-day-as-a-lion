@@ -1,8 +1,8 @@
 {% extends 'App/main.twig' %}
 
 {% block messages %}
-	{% if flash.success %}<div class="ui positive message">{{ flash.success }}</div>{% endif %}
-	{% if flash.error %}<div class="ui negative message">{{ flash.error }}</div>{% endif %}
+	{% if flash.success %}<br /><div class="ui positive message">{{ flash.success }}</div>{% endif %}
+	{% if flash.error %}<br /><div class="ui negative message">{{ flash.error }}</div>{% endif %}
 {% endblock %}
 
 {% block current_data_title %}{{ currentLinkData.month }}/{{ currentLinkData.year }}{% endblock %}
