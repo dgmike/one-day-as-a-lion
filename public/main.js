@@ -6,7 +6,7 @@
   var addEntrance, addEntranceAction, addOut, parseFormValidation, commit, commitAction, remove;
 
   parseFormValidation = function () {
-    var form = $('.modal form'),
+    var form = $('.modal .form'),
       formValidation = form.data('formValidation');
 
     return {
@@ -42,7 +42,7 @@
       formData = parseFormValidation(),
       form = formData.form,
       formValidation = formData.formValidation,
-      data = form.serialize();
+      data = form.find(':input').serialize();
 
     event.preventDefault();
 
@@ -74,12 +74,12 @@
       },
       modal: {
         onVisible: function () {
-          $(this).find('form').formValidation({framework:'semantic'});
+          $(this).find('.form').formValidation({framework:'semantic'});
           $('#form_add_entrance [name="entrance[add][status]"]').trigger('change');
         },
         onApprove: function () {
           var formValidation;
-          formValidation = $(this).find('form').data('formValidation');
+          formValidation = $(this).find('.form').data('formValidation');
           formValidation.validate();
           return formValidation.isValid();
         }
@@ -105,12 +105,12 @@
       },
       modal: {
         onVisible: function () {
-          $(this).find('form').formValidation({framework:'semantic'});
+          $(this).find('.form').formValidation({framework:'semantic'});
           $('#form_add_remove [name="entrance[remove][status]"]').trigger('change');
         },
         onApprove: function () {
           var formValidation;
-          formValidation = $(this).find('form').data('formValidation');
+          formValidation = $(this).find('.form').data('formValidation');
           formValidation.validate();
           return formValidation.isValid();
         }
@@ -123,7 +123,7 @@
       formData = parseFormValidation(),
       form = formData.form,
       formValidation = formData.formValidation,
-      data = form.serialize();
+      data = form.find(':input').serialize();
 
     event.preventDefault();
 
@@ -159,11 +159,11 @@
       },
       modal: {
         onVisible: function () {
-          $(this).find('form').formValidation({framework:'semantic'});
+          $(this).find('.form').formValidation({framework:'semantic'});
         },
         onApprove: function () {
           var formValidation;
-          formValidation = $(this).find('form').data('formValidation');
+          formValidation = $(this).find('.form').data('formValidation');
           formValidation.validate();
           return formValidation.isValid();
         }
