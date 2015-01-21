@@ -20,10 +20,14 @@ $monthYearConditions = array(
 );
 
 // routing
+$secureRoute = 'Controllers\\Secure::secureRoute';
+
 Route::get('/',       'Controllers\\Entrypoint:login')->name('root');
 Route::post('/login', 'Controllers\\Entrypoint:loginAction')->name('login');
-Route::get('/:year-:month', 'Controllers\\Main:index')->conditions($monthYearConditions)->name('main');
-Route::post('/:year-:month', 'Controllers\\Main:create')->conditions($monthYearConditions);
-Route::put('/:year-:month', 'Controllers\\Main:update')->conditions($monthYearConditions);
-Route::delete('/:year-:month', 'Controllers\\Main:remove')->conditions($monthYearConditions);
+
+Route::get('/:year-:month',    $secureRoute, 'Controllers\\Main:index')->conditions($monthYearConditions)->name('main');
+Route::post('/:year-:month',   $secureRoute, 'Controllers\\Main:create')->conditions($monthYearConditions);
+Route::put('/:year-:month',    $secureRoute, 'Controllers\\Main:update')->conditions($monthYearConditions);
+Route::delete('/:year-:month', $secureRoute, 'Controllers\\Main:remove')->conditions($monthYearConditions);
+
 Route::get('/logout', 'Controllers\\Entrypoint:logout')->name('logout');
