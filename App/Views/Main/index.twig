@@ -7,6 +7,22 @@
 
 {% block current_data_title %}{{ currentLinkData.month }}/{{ currentLinkData.year }}{% endblock %}
 
+{% block statistics %}
+<div class="ui two columns centered grid segment">
+	<div class="column">
+		<div class="ui text right floated statistic">
+			<div class="label">{{ t('estimated-amount') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated + sums.out.estimated) }}</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class="ui text left floated statistic">
+			<div class="label">{{ t('real-amount') }}</div>
+			<div class="value">{{ money(sums.entrance.real + sums.out.real) }}</div>
+		</div>
+	</div>
+</div>{% endblock %}
+
 {% block previous_button %}
 	<a href="{{  siteUrl(urlFor('main', previousLinkData)) }}" class="ui fluid button">
 		{{ previousLinkData.month }}/{{ previousLinkData.year }}
