@@ -3,7 +3,7 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addEntranceAction, addOut, parseFormValidation, commit, commitAction, remove;
+  var addEntrance, addOut, parseFormValidation, commit, commitAction, remove, showModal;
 
   parseFormValidation = function () {
     var form = $('.modal .form'),
@@ -17,27 +17,19 @@
 
   // event to validate "real value or not"
   $(document)
-    .on('change', '.modal [name="entrance[add][status]"]', function () {
+    .on('change', '.modal [name$="[status]"]', function () {
       var formData = parseFormValidation(),
         form = formData.form,
         formValidation = formData.formValidation,
-        happened = (2 == $(this).val());
+        happened = (2 == $(this).val()),
+        addRemove = !!this.name.match(/\[add\]/) ? 'add' : 'remove';
 
-      formValidation.enableFieldValidators('entrance[add][real]', happened, 'notEmpty');
-      formValidation.revalidateField('entrance[add][real]');
-    })
-    .on('change', '.modal [name="entrance[remove][status]"]', function () {
-      var formData = parseFormValidation(),
-        form = formData.form,
-        formValidation = formData.formValidation,
-        happened = (2 == $(this).val());
-
-      formValidation.enableFieldValidators('entrance[remove][real]', happened, 'notEmpty');
-      formValidation.revalidateField('entrance[remove][real]');
+      formValidation.enableFieldValidators('entrance[' + addRemove + '][real]', happened, 'notEmpty');
+      formValidation.revalidateField('entrance[' + addRemove + '][real]');
     });
 
   // trigger formValidation
-  addEntranceAction = function (event) {
+  commitAction = function (event) {
     var url = window.location.pathname,
       formData = parseFormValidation(),
       form = formData.form,
@@ -53,6 +45,28 @@
 
     $.post(url, data, function () {
       window.location.reload();
+    });
+  };
+
+  showModal = function (options) {
+    modal.show({
+      title: options.title,
+      content: options.form,
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
+      action: { ok: commitAction },
+      modal: {
+        onVisible: function () {
+          $(this).find('.form').formValidation({framework:'semantic'});
+          $('.modal [name$="[status]"]').trigger('change');
+        },
+        onApprove: function () {
+          var formValidation;
+          formValidation = $(this).find('.form').data('formValidation');
+          formValidation.validate();
+          return formValidation.isValid();
+        }
+      }
     });
   };
 
@@ -64,26 +78,9 @@
     addEntranceForm = $('#add_entrance_form').clone();
     addEntranceForm.removeAttr('id').attr('id', 'form_add_entrance');
 
-    modal.show({
+    showModal({
       title: i18n._('add-entrance'),
-      content: addEntranceForm,
-      cancel: i18n._('cancel'),
-      ok: i18n._('ok'),
-      action: {
-        ok: addEntranceAction
-      },
-      modal: {
-        onVisible: function () {
-          $(this).find('.form').formValidation({framework:'semantic'});
-          $('#form_add_entrance [name="entrance[add][status]"]').trigger('change');
-        },
-        onApprove: function () {
-          var formValidation;
-          formValidation = $(this).find('.form').data('formValidation');
-          formValidation.validate();
-          return formValidation.isValid();
-        }
-      }
+      form: addEntranceForm
     });
   };
 
@@ -95,45 +92,9 @@
     addEntranceForm = $('#add_remove_form').clone();
     addEntranceForm.removeAttr('id').attr('id', 'form_add_remove');
 
-    modal.show({
+    showModal({
       title: i18n._('add-out'),
-      content: addEntranceForm,
-      cancel: i18n._('cancel'),
-      ok: i18n._('ok'),
-      action: {
-        ok: addEntranceAction
-      },
-      modal: {
-        onVisible: function () {
-          $(this).find('.form').formValidation({framework:'semantic'});
-          $('#form_add_remove [name="entrance[remove][status]"]').trigger('change');
-        },
-        onApprove: function () {
-          var formValidation;
-          formValidation = $(this).find('.form').data('formValidation');
-          formValidation.validate();
-          return formValidation.isValid();
-        }
-      }
-    });
-  };
-
-  commitAction = function () {
-    var url = window.location.pathname,
-      formData = parseFormValidation(),
-      form = formData.form,
-      formValidation = formData.formValidation,
-      data = form.find(':input').serialize();
-
-    event.preventDefault();
-
-    formValidation.validate();
-    if (!formValidation.isValid()) {
-      return;
-    }
-
-    $.post(url, data, function () {
-      window.location.reload();
+      form: addEntranceForm
     });
   };
 
@@ -149,27 +110,10 @@
     commitForm.find('input[name="commit[day]"]').val(rowData.day);
     commitForm.find('input[name="commit[real]"]').val(Math.abs(rowData.estimated));
 
-    modal.show({
+    showModal({
       title: i18n._('commit-transaction'),
-      content: commitForm,
-      cancel: i18n._('cancel'),
-      ok: i18n._('ok'),
-      action: {
-        ok: commitAction
-      },
-      modal: {
-        onVisible: function () {
-          $(this).find('.form').formValidation({framework:'semantic'});
-        },
-        onApprove: function () {
-          var formValidation;
-          formValidation = $(this).find('.form').data('formValidation');
-          formValidation.validate();
-          return formValidation.isValid();
-        }
-      }
+      form: commitForm
     });
-
   };
 
   remove = function (event) {
