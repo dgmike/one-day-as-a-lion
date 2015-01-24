@@ -12,6 +12,7 @@ $lang['add-out'] = 'Adicionar Saída';
 $lang['commit-transaction'] = 'Efetuar transação';
 $lang['cancel'] = 'Cancele a ação';
 $lang['ok'] = 'Efetue a ação';
+$lang['remove'] = 'Remover';
 $lang['confirm-remove-transaction'] = 'Tem certeza que deseja remover esta entrada?';
 
 // results

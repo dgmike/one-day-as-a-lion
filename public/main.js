@@ -120,10 +120,6 @@
     var id, data;
     event.preventDefault();
 
-    if (!confirm(i18n._('confirm-remove-transaction'))) {
-      return;
-    }
-
     id = $(event.target).parents('tr').data('id');
 
     data = {
@@ -131,8 +127,18 @@
       "id": id
     };
 
-    $.post(window.location.pathname, data, function () {
-      window.location.reload();
+    modal.show({
+      title: i18n._('remove'),
+      content: i18n._('confirm-remove-transaction'),
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
+      action: {
+        ok: function () {
+          $.post(window.location.pathname, data, function () {
+            window.location.reload();
+          });
+        }
+      }
     });
   };
 
