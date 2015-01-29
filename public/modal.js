@@ -68,6 +68,7 @@
 
     if (options.action.ok) {
       modalElement.find('.actions .positive.button')
+        .off('click', wrapButtonAction)
         .on('click', {
           modalElement: modalElement,
           actions: options.action,
@@ -77,6 +78,7 @@
 
     if (options.action.cancel) {
       modalElement.find('.actions .negative.button')
+        .off('click', wrapButtonAction)
         .on('click', {
           modalElement: modalElement,
           actions: options.action,

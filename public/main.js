@@ -3,7 +3,30 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addOut, parseFormValidation, commit, commitAction, remove, showModal;
+  var addEntrance, addOut, parseFormValidation, commit, commitAction, remove, showModal, actionImport;
+
+  actionImport = function (event) {
+    var data, target = $(event.target).closest('a').attr('href');
+    event.preventDefault();
+    data = {
+      // @TODO add from
+      to: window.location.pathname.replace(/[^\d-]/g, '')
+    };
+
+    modal.show({
+      title: i18n._('import'),
+      content: i18n._('confirm-import'),
+      cancel: i18n._('cancel'),
+      ok: i18n._('ok'),
+      action: {
+        ok: function () {
+          $.post(target, data, function () {
+            window.location.reload();
+          });
+        }
+      }
+    });
+  };
 
   parseFormValidation = function () {
     var form = $('.modal .form'),
@@ -142,6 +165,7 @@
     });
   };
 
+  $('.action-import').on('click', actionImport);
   $('#add-entrance').on('click', addEntrance);
   $('#add-remove').on('click', addOut);
   $('.commit-button').on('click', commit);

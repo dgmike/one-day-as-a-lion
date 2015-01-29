@@ -30,4 +30,6 @@ Route::post('/:year-:month',   $secureRoute, 'Controllers\\Main:create')->condit
 Route::put('/:year-:month',    $secureRoute, 'Controllers\\Main:update')->conditions($monthYearConditions);
 Route::delete('/:year-:month', $secureRoute, 'Controllers\\Main:remove')->conditions($monthYearConditions);
 
+Route::post('/import',   $secureRoute, 'Controllers\\Main:import')->conditions($monthYearConditions)->name('import');
+
 Route::get('/logout', 'Controllers\\Entrypoint:logout')->name('logout');

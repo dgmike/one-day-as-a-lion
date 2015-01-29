@@ -9,6 +9,7 @@ use SlimFacades\Input;
 use SlimFacades\View;
 use SlimFacades\Response;
 use Model;
+use Respect\Validation\Validator as v;
 
 class Main
 {
@@ -118,6 +119,45 @@ class Main
 			return;
 		}
 		Response::setStatus(402);
+	}
+
+	static public function import()
+	{
+		$to = Input::post('to') . '-01';
+		$validate = v::date('Y-m-d');
+
+		$date = new \DateTime($to);
+		$date->sub(new \DateInterval('P1D'));
+
+		try {
+			$validate->assert($to);
+
+			list($year, $month) = explode('-', $to);
+			$entries = Model::factory('Models\\Entry')
+				->whereEqual('year', (int) $date->format('Y'))
+				->whereEqual('month', (int) $date->format('m'))
+				->findMany();
+
+			foreach ($entries as $entry) {
+				$newEntry = Model::factory('Models\\Entry')->create();
+				foreach ($entry->as_array() as $key => $value) {
+					if ('id' !== $key) {
+						$newEntry->{$key} = $value;
+					}
+				}
+				$newEntry->year = $year;
+				$newEntry->month = $month;
+				$newEntry->status = 1;
+				$newEntry->type = ($entry->estimated < 0 ? 'remove' : 'add');
+				$newEntry->save();
+			}
+			App::flash('success', 'Dados importados com sucesso!');
+			return;
+		} catch (\Exception $e) {
+			print_r($e);
+			App::flash('error', 'Ocorreram erros ao salvar entrada');
+			Response::setStatus(402);
+		}
 	}
 
 	static protected function save($entry, \stdClass $data)
