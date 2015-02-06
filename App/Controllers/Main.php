@@ -22,38 +22,59 @@ class Main
 		$currentLinkData = compact('year', 'month');
 
 		$date->sub(new DateInterval('P1M'));
-		$previousLinkData = array('year' => $date->format('Y'), 'month' => $date->format('m'));
+		$previousLinkData = array(
+			'year' => $date->format('Y'),
+			'month' => $date->format('m')
+		);
 
 		$date->add(new DateInterval('P2M'));
-		$nextLinkData = array('year' => $date->format('Y'), 'month' => $date->format('m'));
+		$nextLinkData = array(
+			'year' => $date->format('Y'),
+			'month' => $date->format('m')
+		);
 
-		$modelEntrance = Model::factory('Models\\Entry');
-		$modelOut = Model::factory('Models\\Entry');
+		$modelEntrance = Model::factory('Models\\Entry')
+			->filter('on', $year, $month)
+			->filter('entrances');
+		$entrances = $modelEntrance->findMany();
 
-		$entrances = $modelEntrance
-			->where('year', (int) $year)
-			->where('month', (int) $month)
-			->whereGte('estimated', 0)
-			->orderByAsc('day')
-			->findMany();
-
-		$outs = $modelOut
-			->where('year', (int) $year)
-			->where('month', (int) $month)
-			->whereLt('estimated', 0)
-			->orderByAsc('day')
-			->findMany();
+		$modelOut = Model::factory('Models\\Entry')
+			->filter('on', $year, $month)
+			->filter('outs');
+		$outs = $modelOut->findMany();
 
 		$sums = array(
 			'entrance' => array(
-				'estimated' => $modelEntrance->sum('estimated'),
-				'real' => $modelEntrance->where('status', 2)->sum('real')
+				'estimated' => array(
+					'first_half' => $modelEntrance->filter('firstHalf')->sum('estimated'),
+					'second_half' => $modelEntrance->filter('secondHalf')->sum('estimated'),
+					'sum' => $modelEntrance->sum('estimated'),
+				),
+				'real' => array(
+					'first_half' => $modelEntrance->filter('chain', 'commited', 'firstHalf')->sum('real'),
+					'second_half' => $modelEntrance->filter('chain', 'commited', 'secondHalf')->sum('real'),
+					'sum' => $modelEntrance->filter('commited')->sum('real'),
+				),
 			),
 			'out' => array(
-				'estimated' => $modelOut->sum('estimated'),
-				'real' => $modelOut->where('status', 2)->sum('real')
+				'estimated' => array(
+					'first_half' => $modelOut->filter('firstHalf')->sum('estimated'),
+					'second_half' => $modelOut->filter('secondHalf')->sum('estimated'),
+					'sum' => $modelOut->sum('estimated'),
+				),
+				'real' => array(
+					'first_half' => $modelOut->filter('chain', 'commited', 'firstHalf')->sum('real'),
+					'second_half' => $modelOut->filter('chain', 'commited', 'secondHalf')->sum('real'),
+					'sum' => $modelOut->filter('commited')->sum('real'),
+				),
 			),
 		);
+
+		// print '<pre>';
+		// print_r(\ORM::get_query_log());
+		// print_r($sums);
+		// print '</pre>';
+		// die;
 
 		$variables = compact(
 			'currentLinkData', 'previousLinkData', 'nextLinkData',

@@ -12,13 +12,29 @@
 	<div class="column">
 		<div class="ui text tiny right floated statistic">
 			<div class="label">{{ t('estimated-amount') }}</div>
-			<div class="value">{{ money(sums.entrance.estimated + sums.out.estimated, true) }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.sum + sums.out.estimated.sum, true) }}</div>
+		</div>
+		<div class="ui text tiny right floated statistic">
+			<div class="label">{{ t('estimated-amount-second_half') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.second_half + sums.out.estimated.second_half, true) }}</div>
+		</div>
+		<div class="ui text tiny right floated statistic">
+			<div class="label">{{ t('estimated-amount-first_half') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.first_half + sums.out.estimated.first_half, true) }}</div>
 		</div>
 	</div>
 	<div class="column">
 		<div class="ui text tiny left floated statistic">
 			<div class="label">{{ t('real-amount') }}</div>
-			<div class="value">{{ money(sums.entrance.real + sums.out.real, true) }}</div>
+			<div class="value">{{ money(sums.entrance.real.sum + sums.out.real.sum, true) }}</div>
+		</div>
+		<div class="ui text tiny left floated statistic">
+			<div class="label">{{ t('real-amount-first_half') }}</div>
+			<div class="value">{{ money(sums.entrance.real.first_half + sums.out.real.first_half, true) }}</div>
+		</div>
+		<div class="ui text tiny left floated statistic">
+			<div class="label">{{ t('real-amount-second_half') }}</div>
+			<div class="value">{{ money(sums.entrance.real.second_half + sums.out.real.second_half, true) }}</div>
 		</div>
 	</div>
 </div>{% endblock %}

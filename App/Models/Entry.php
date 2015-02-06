@@ -11,13 +11,59 @@ class Entry
 
 	public $type = 'add';
 
+	public static function chain($orm)
+	{
+		$orm = clone $orm;
+		$chains = array_slice(func_get_args(), 1);
+		foreach ($chains as $chain) {
+			$orm = $orm->filter($chain);
+		}
+		return $orm;
+	}
+
+	public static function on($orm, $year, $month)
+	{
+		return $orm
+			->where('year', (int) $year)
+			->where('month', (int) $month)
+			->orderByAsc('day');
+	}
+
+	public static function commited($orm)
+	{
+		$orm = clone $orm;
+		return $orm->whereEqual('status', 2);
+	}
+
+	public static function entrances($orm)
+	{
+		return $orm->whereGte('estimated', 0);
+	}
+
+	public static function outs($orm)
+	{
+		return $orm->whereLt('estimated', 0);
+	}
+
+	public static function firstHalf($orm)
+	{
+		$orm = clone $orm;
+		return $orm->whereLt('day', 15);
+	}
+
+	public static function secondHalf($orm)
+	{
+		$orm = clone $orm;
+		return $orm->whereGte('day', 15);
+	}
+
 	public function assign($data)
 	{
 		$attributes = array(
 			'type', 'year', 'month', 'day', 'description',
 			'estimated', 'real', 'status'
 		);
-		
+
 		foreach ($attributes as $attribute) {
 			if (isset($data->{$attribute})) {
 				$this->{$attribute} = $data->{$attribute};
