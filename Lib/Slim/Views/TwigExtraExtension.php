@@ -41,6 +41,6 @@ class TwigExtraExtension
         if (false === $realAmount) {
             $amount = abs($amount);
         }
-        return money_format('%i', $amount);
+        return money_format('%n', $amount);
     }
 }

@@ -10,13 +10,13 @@
 {% block statistics %}
 <div class="ui two columns centered grid segment">
 	<div class="column">
-		<div class="ui text right floated statistic">
+		<div class="ui text tiny right floated statistic">
 			<div class="label">{{ t('estimated-amount') }}</div>
 			<div class="value">{{ money(sums.entrance.estimated + sums.out.estimated, true) }}</div>
 		</div>
 	</div>
 	<div class="column">
-		<div class="ui text left floated statistic">
+		<div class="ui text tiny left floated statistic">
 			<div class="label">{{ t('real-amount') }}</div>
 			<div class="value">{{ money(sums.entrance.real + sums.out.real, true) }}</div>
 		</div>
