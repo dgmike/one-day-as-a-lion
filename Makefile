@@ -18,8 +18,10 @@ composer: check
 bowerinstall:
 	bower install
 
-install: composer bowerinstall
+composerinstall: composer
 	php composer.phar install
+
+install: composerinstall bowerinstall
 
 update: composer bowerinstall
 	php composer.phar update
