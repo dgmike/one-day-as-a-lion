@@ -48,13 +48,13 @@ class Entry
 	public static function firstHalf($orm)
 	{
 		$orm = clone $orm;
-		return $orm->whereLt('day', 15);
+		return $orm->whereLte('day', 15);
 	}
 
 	public static function secondHalf($orm)
 	{
 		$orm = clone $orm;
-		return $orm->whereGte('day', 15);
+		return $orm->whereGt('day', 15);
 	}
 
 	public function assign($data)
