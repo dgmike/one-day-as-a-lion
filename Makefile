@@ -18,13 +18,18 @@ composer: check
 bowerinstall:
 	bower install
 
+bowerupdate:
+	bower update
+
 composerinstall: composer
 	php composer.phar install
 
+composerupdate: composer
+	php composer.phar update
+
 install: composerinstall bowerinstall
 
-update: composer bowerinstall
-	php composer.phar update
+update: composerupdate bowerupdate
 
 server:
 	php -S localhost:8080 app.php
