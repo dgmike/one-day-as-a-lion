@@ -3,7 +3,8 @@
 
 (function ($) {
   "use strict";
-  var addEntrance, addOut, parseFormValidation, commit, commitAction, remove, showModal, actionImport;
+  var addEntrance, addOut, parseFormValidation, commit, commitAction, remove,
+    showModal, actionImport, edit, editAction;
 
   actionImport = function (event) {
     var data, target = $(event.target).closest('a').attr('href');
@@ -131,7 +132,7 @@
     commitForm.removeAttr('id').attr('id', 'form_commit');
     commitForm.find('input[name="commit[id]"]').val(rowData.id);
     commitForm.find('input[name="commit[day]"]').val(rowData.day);
-    commitForm.find('input[name="commit[real]"]').val(Math.abs(rowData.estimated));
+    commitForm.find('input[name="commit[real]"]').val(Math.abs(rowData.real ? rowData.real : rowData.estimated));
 
     showModal({
       title: i18n._('commit-transaction'),
@@ -165,10 +166,66 @@
     });
   };
 
+  editAction = function () {
+    var data = $('.modal.visible .form :input').serialize();
+
+  };
+
+  edit = function (event) {
+    var $target = $(event.target),
+      data = $target.parents('tr').data(),
+      id = data.id,
+      editForm = $('#edit_form').clone(),
+      rnd = Math.round(Math.random() * 100000),
+      getInput;
+
+    event.preventDefault();
+
+    editForm.removeAttr('id');
+    editForm.find('label').each(function (key, element) {
+      var $element = $(element),
+        inputId = $(element).attr('for') + '_' + rnd;
+
+      $(element)
+        .attr('for', inputId)
+        .parents('.field')
+        .find(':input')
+        .attr('id', inputId);
+    });
+
+    getInput = function (name) {
+      return editForm.find('[name=entrance\\[edit\\]\\[' + name + '\\]]');
+    };
+
+    getInput('id').val(id);
+    getInput('type').val(data.estimated > 0 ? 'entrance' : 'out');
+    getInput('day').val(data.day);
+    getInput('description').val(data.description);
+    getInput('estimated').val(Math.abs(data.estimated));
+    getInput('real').val(Math.abs(data.real));
+    getInput('status').val(data.status);
+
+    // modal.show({
+    //   title: 'Edit',
+    //   content: editForm,
+    //   cancel: i18n._('cancel'),
+    //   ok: i18n._('ok'),
+    //   action: { ok: editAction }
+    // });
+
+    showModal({
+      title: 'edit',
+      form: editForm
+    })
+
+    return;
+  };
+
   $('.action-import').on('click', actionImport);
   $('#add-entrance').on('click', addEntrance);
   $('#add-remove').on('click', addOut);
   $('.commit-button').on('click', commit);
   $('.remove-button').on('click', remove);
+  $('.edit-button').on('click', edit);
 
 }(window.jQuery));

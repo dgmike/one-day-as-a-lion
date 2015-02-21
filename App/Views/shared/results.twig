@@ -16,8 +16,12 @@
         {% for entry in entries %}
         <tr
             data-id="{{ entry.id }}"
-            data-day="{{ entry.day }}"
-            data-estimated="{{ entry.real ? entry.real : entry.estimated }}">
+						data-day="{{ entry.day }}"
+						data-description="{{ entry.description }}"
+            data-estimated="{{ entry.estimated }}"
+            data-real="{{ entry.real }}"
+						data-status="{{ entry.status }}"
+				>
             <td>{{ entry.day }}</td>
             <td>{{ entry.description }}</td>
             <td>{{ money(entry.estimated) }}</td>
@@ -30,6 +34,7 @@
             </td>
             <td>
                 <div class="ui icon mini buttons">
+										<button type="button" class="ui button edit-button"><i class="pencil icon"></i></button>
                     {% if entry.status != 2 %}
                     <button type="button" class="ui button commit-button"><i class="check icon"></i></button>
                     {% endif %}

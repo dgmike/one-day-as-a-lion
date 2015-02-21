@@ -105,27 +105,38 @@ class Main
 			self::save($entry, $remove);
 			return;
 		}
-		Response::setStatus(402);
+		Response::setStatus(403);
+	}
+
+	static public function commit($year, $month)
+	{
+		$commit = Input::post('commit', false);
+		if (is_array($commit)) {
+			return self::updateData($commit);
+		}
+		Response::setStatus(403);
 	}
 
 	static public function update($year, $month)
 	{
-		$commit = Input::post('commit', false);
-		if (is_array($commit)) {
-			$entry = Model::factory('Models\\Entry')
-				->whereEqual('id', (int) $commit['id'])
-				->findOne();
-
-			if ($entry->estimated < 0) {
-				$entry->type = 'remove';
-			}
-
-			$commit['status'] = 2;
-
-			self::save($entry, (object) $commit);
-			return;
+		$entrance = Input::post('entrance', false);
+		if (is_array($entrance) && is_array($entrance['edit'])) {
+			return self::updateData($entrance['edit']);
 		}
-		Response::setStatus(402);
+		Response::setStatus(403);
+	}
+
+	static protected function updateData($data)
+	{
+		$entry = Model::factory('Models\\Entry')
+			->whereEqual('id', (int) $data['id'])
+			->findOne();
+
+		if ($entry->estimated < 0) {
+			$entry->type = 'remove';
+		}
+
+		self::save($entry, (object) $data);
 	}
 
 	static public function remove($year, $month)
@@ -139,7 +150,7 @@ class Main
 			App::flash('success', 'Entrada removida com sucesso!');
 			return;
 		}
-		Response::setStatus(402);
+		Response::setStatus(403);
 	}
 
 	static public function import()
@@ -177,7 +188,7 @@ class Main
 		} catch (\Exception $e) {
 			print_r($e);
 			App::flash('error', 'Ocorreram erros ao salvar entrada');
-			Response::setStatus(402);
+			Response::setStatus(403);
 		}
 	}
 
@@ -193,7 +204,7 @@ class Main
 			Response::setStatus(200);
 		} catch (\Exception $e) {
 			App::flash('error', 'Ocorreram erros ao salvar entrada');
-			Response::setStatus(402);
+			Response::setStatus(403);
 		}
 	}
 }
