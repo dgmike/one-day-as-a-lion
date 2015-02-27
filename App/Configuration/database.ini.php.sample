@@ -1,0 +1,26 @@
+;<?php
+;die();
+;/*
+
+[default]
+; driver=sqlite
+; connection_string=
+; hostname=
+; port=
+; database=
+; username=
+; password=
+
+[development]
+driver=sqlite
+connection_string=ROOT_PATH/database.sqlite
+
+[production]
+driver=mysql
+hostname=
+database=
+username=
+password=
+
+;*/
+;?>

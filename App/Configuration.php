@@ -23,6 +23,19 @@ class Configuration
 		$this->environment = $environment;
 	}
 
+	public function getConfig($config)
+	{
+		$config = preg_replace(/[a-z0-9_-]/, '');
+		$configFile = sprintf('%s/Configuration/%s.ini.php', __DIR__, $config);
+		if (!file_exists($configFile)) {
+			return array();
+		}
+		$environment = $this->environment;
+		$data = parse_ini_file($configFile, true);
+		$default = isset($data['default']) ? $data['default'] : array();
+		return isset($data[$environment]) ? $data[$environment] : $default;
+	}
+
 	public function setupGlobal($app)
 	{
 		// initialize the Facade class
@@ -64,6 +77,8 @@ class Configuration
 				'michael' => 'michael',
 			),
 		));
+
+		$databaseSettings = $this->getConfig('database');
 
 		$database = 'sqlite:' . dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database.sqlite';
 		ORM::configure($database);
