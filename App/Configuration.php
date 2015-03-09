@@ -25,7 +25,7 @@ class Configuration
 
 	public function getConfig($config)
 	{
-		$config = preg_replace(/[a-z0-9_-]/, '');
+		$config = preg_replace('/[^a-z0-9_-]/', '', $config);
 		$configFile = sprintf('%s/Configuration/%s.ini.php', __DIR__, $config);
 		if (!file_exists($configFile)) {
 			return array();

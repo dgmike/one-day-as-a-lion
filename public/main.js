@@ -166,11 +166,6 @@
     });
   };
 
-  editAction = function () {
-    var data = $('.modal.visible .form :input').serialize();
-
-  };
-
   edit = function (event) {
     var $target = $(event.target),
       data = $target.parents('tr').data(),
@@ -204,14 +199,6 @@
     getInput('estimated').val(Math.abs(data.estimated));
     getInput('real').val(Math.abs(data.real));
     getInput('status').val(data.status);
-
-    // modal.show({
-    //   title: 'Edit',
-    //   content: editForm,
-    //   cancel: i18n._('cancel'),
-    //   ok: i18n._('ok'),
-    //   action: { ok: editAction }
-    // });
 
     showModal({
       title: 'edit',

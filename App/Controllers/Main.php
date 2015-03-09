@@ -133,6 +133,12 @@ class Main
 			->findOne();
 
 		if ($entry->estimated < 0) {
+			if (isset($data['estimated'])) {
+				$data['estimated'] = -(abs($data['estimated']));
+			}
+			if (isset($data['real'])) {
+				$data['real'] = -(abs($data['real']));
+			}
 			$entry->type = 'remove';
 		}
 
