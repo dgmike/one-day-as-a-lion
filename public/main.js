@@ -193,7 +193,7 @@
     };
 
     getInput('id').val(id);
-    getInput('type').val(data.estimated > 0 ? 'entrance' : 'out');
+    getInput('type').val(data.estimated > 0 ? 'entrance' : 'remove');
     getInput('day').val(data.day);
     getInput('description').val(data.description);
     getInput('estimated').val(Math.abs(data.estimated));
