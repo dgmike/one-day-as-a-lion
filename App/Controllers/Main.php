@@ -132,7 +132,7 @@ class Main
 			->whereEqual('id', (int) $data['id'])
 			->findOne();
 
-		$entry->type = $data['type'] == 'entrance' ? 'entrance' : 'out';
+		$entry->type = $data['type'] == 'entrance' ? 'entrance' : 'remove';
 
 		self::save($entry, (object) $data);
 	}
