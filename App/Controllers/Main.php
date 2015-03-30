@@ -132,9 +132,7 @@ class Main
 			->whereEqual('id', (int) $data['id'])
 			->findOne();
 
-		if ($entry->estimated < 0) {
-			$entry->type = 'remove';
-		}
+		$entry->type = $data['type'] == 'entrance' ? 'entrance' : 'out';
 
 		self::save($entry, (object) $data);
 	}
