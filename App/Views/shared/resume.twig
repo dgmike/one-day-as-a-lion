@@ -1,0 +1,28 @@
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{ t('estimated-amount') }}</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('estimated-amount-first_half'), money(sums.entrance.estimated.first_half + sums.out.estimated.first_half, true))|raw }} </div>
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('estimated-amount-second_half'), money(sums.entrance.estimated.second_half + sums.out.estimated.second_half, true))|raw }} </div>
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('estimated-amount'), money(sums.entrance.estimated.sum + sums.out.estimated.sum, true))|raw }} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="visible-sx-block hidden-sm hidden-md hidden-lg">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{ t('real-amount') }}</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('real-amount-first_half'), money(sums.entrance.real.first_half + sums.out.real.first_half, true))|raw }} </div>
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('real-amount-second_half'), money(sums.entrance.real.second_half + sums.out.real.second_half, true))|raw }} </div>
+          <div class="col-xs-4 col-md-4"> {{ panelWidget(t('real-amount'), money(sums.entrance.real.sum + sums.out.real.sum, true))|raw }} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

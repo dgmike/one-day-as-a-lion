@@ -1,0 +1,50 @@
+.form-control::-webkit-input-placeholder {
+  color: #AAAAAA;
+  font-style: italic;
+}
+
+body {
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  top: -20px;
+  left: -20px;
+  width: 110%;
+  height: 110%;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  -webkit-filter: blur(8px) opacity(.6) brightness(70%) saturate(140%);
+  filter: blur(8px) opacity(.6) brightness(70%) saturate(140%);
+}
+
+.page-title {
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 5%;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.form-login {
+  width: 250px;
+  padding-top: 2%;
+  margin: 0 auto;
+}
+
+.form-login .form-control {
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, .1);
+  border-bottom: 1px solid #FFF;
+  outline: 0;
+  letter-spacing: 1px;
+  margin: 15px 0;
+  box-shadow: none;
+  padding: 5px 10px;
+  color: #FFFFFF;
+}

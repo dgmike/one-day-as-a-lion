@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>{{ t('title') }} - {{ t('login-in-system') }}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="/public/components/semantic-ui/dist/semantic.min.css" />
-	<link rel="stylesheet" href="/public/login.css" />
-</head>
-<body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ t('title') }} - {{ t('login-in-system') }}</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/public/assets/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="/public/assets/css/login.css" />
+  </head>
+  <body>
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
-</body>
+  </body>
 </html>

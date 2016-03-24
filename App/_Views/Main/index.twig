@@ -1,0 +1,101 @@
+{% extends 'App/main.twig' %}
+
+{% block messages %}
+	{% if flash.success %}<br /><div class="ui positive message">{{ flash.success }}</div>{% endif %}
+	{% if flash.error %}<br /><div class="ui negative message">{{ flash.error }}</div>{% endif %}
+{% endblock %}
+
+{% block current_data_title %}{{ currentLinkData.month }}/{{ currentLinkData.year }}{% endblock %}
+
+{% block statistics %}
+<div class="ui two columns centered grid segment">
+	<div class="column">
+		<div class="ui text tiny right floated statistic">
+			<div class="label">{{ t('estimated-amount') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.sum + sums.out.estimated.sum, true) }}</div>
+		</div>
+		<div class="ui text tiny right floated statistic">
+			<div class="label">{{ t('estimated-amount-second_half') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.second_half + sums.out.estimated.second_half, true) }}</div>
+		</div>
+		<div class="ui text tiny right floated statistic">
+			<div class="label">{{ t('estimated-amount-first_half') }}</div>
+			<div class="value">{{ money(sums.entrance.estimated.first_half + sums.out.estimated.first_half, true) }}</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class="ui text tiny left floated statistic">
+			<div class="label">{{ t('real-amount') }}</div>
+			<div class="value">{{ money(sums.entrance.real.sum + sums.out.real.sum, true) }}</div>
+		</div>
+		<div class="ui text tiny left floated statistic">
+			<div class="label">{{ t('real-amount-first_half') }}</div>
+			<div class="value">{{ money(sums.entrance.real.first_half + sums.out.real.first_half, true) }}</div>
+		</div>
+		<div class="ui text tiny left floated statistic">
+			<div class="label">{{ t('real-amount-second_half') }}</div>
+			<div class="value">{{ money(sums.entrance.real.second_half + sums.out.real.second_half, true) }}</div>
+		</div>
+	</div>
+</div>{% endblock %}
+
+{% block previous_button %}
+	<a href="{{  siteUrl(urlFor('main', previousLinkData)) }}" class="ui fluid button">
+		{{ previousLinkData.month }}/{{ previousLinkData.year }}
+	</a>
+{% endblock %}
+
+{% block next_button %}
+	<a href="{{  siteUrl(urlFor('main', nextLinkData)) }}" class="ui fluid button">
+		{{ nextLinkData.month }}/{{ nextLinkData.year }}
+	</a>
+{% endblock %}
+
+{% block entrance %}
+	<h2 class="header">
+		{{ t('entrance') }}
+		<a href="#" id="add-entrance" class="ui mini button right floated">
+			<i class="plus icon"></i> {{ t('add-entrance') }}
+		</a>
+	</h2>
+    {{ include('shared/results.twig', {entries: entrances, sums: sums.entrance}) }}
+{% endblock %}
+
+{% block out %}
+	<h2 class="header">
+		{{ t('out') }}
+		<a href="#" id="add-remove" class="ui mini button right floated">
+			<i class="plus icon"></i> {{ t('add-out') }}
+		</a>
+	</h2>
+
+    {{ include('shared/results.twig', {entries: outs, sums: sums.out}) }}
+{% endblock %}
+
+{% block header %}
+	<link rel="stylesheet" href="/public/components/formValidation/dist/css/formValidation.min.css" />
+
+	<link rel="stylesheet" href="/public/main.css" />
+{% endblock %}
+
+{% block footer %}
+	{% include 'shared/modal.twig' %}
+	{% include 'Main/add_entrance_form.twig' %}
+	{% include 'Main/add_remove_form.twig' %}
+	{% include 'Main/commit_form.twig' %}
+	{% include 'Main/edit_form.twig' %}
+
+	<script src="/public/components/jquery/dist/jquery.min.js"></script>
+
+	<script src="/public/components/semantic-ui/dist/semantic.min.js"></script>
+
+	<script src="/public/components/formValidation/dist/js/formValidation.min.js"></script>
+	<script src="/public/components/formValidation/dist/js/framework/semantic.min.js"></script>
+	<script src="/public/components/formValidation/dist/js/language/pt_BR.js"></script>
+
+	<script src="/public/components/i18n/i18n.js"></script>
+	<script>{{ include('shared/translations.twig') }}</script>
+
+	<script src="/public/modal.js"></script>
+	<script src="/public/main.js"></script>
+{% endblock %}

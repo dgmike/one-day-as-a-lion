@@ -53,7 +53,8 @@ class Configuration
 		Config::set('templates.path', __DIR__ . '/Views');
 
 		// Languages
-		setlocale(LC_ALL, 'pt_BR');
+		setlocale(LC_ALL, 'pt_BR.UTF-8');
+
 		Config::set('language', 'pt-br');
 		Languages::setGlobalPath(__DIR__ . '/Languages');
 		Languages::setGlobalDefault(Config::get('language'));

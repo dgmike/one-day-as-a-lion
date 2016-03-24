@@ -2,30 +2,30 @@
 
 {% block content %}
 
-<div class="main-login">
-	<h1 class="ui dividing header">{{ t('login-in-system') }}</h1>
+<!-- <img class="background" src="https://c1.staticflickr.com/5/4068/4640877836_870454aa38_b_d.jpg" alt="https://www.flickr.com/photos/48283115@N03/4640877836/sizes/l" /> -->
+<!-- <img class="background" src="https://c2.staticflickr.com/4/3405/3625041997_259faacb32_b_d.jpg" alt="https://www.flickr.com/photos/vlima/3625041997/sizes/l" /> -->
+<!-- <img class="background" src="https://c2.staticflickr.com/8/7456/11239843786_1495275a30_h_d.jpg" alt="https://www.flickr.com/photos/rodrigowblum/11239843786/sizes/l" /> -->
+<img class="background" src="https://c1.staticflickr.com/7/6214/6352564795_63a012fcfc_b_d.jpg" alt="https://www.flickr.com/photos/rogerplachinski/6352564795/sizes/l" />
 
-	{% if flash.loginerror %}
-	<div class="ui message error">{{ t('invalid-login-or-password') }}</div>
-	{% endif %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="wrap">
+        <h1 class="page-title">{{ t('login-in-system') }}</h1>
 
-	<form action="{{ siteUrl(urlFor('login')) }}" class="ui form" method="post">
-		<div class="field">
-			<label for="username">{{ t('user') }}</label>
-			<div class="ui icon input">
-				<input type="text" name="username" autofocus />
-				<i class="user icon"></i>
-			</div>
-		</div>
-		<div class="required field">
-			<label for="password">{{ t('password') }}</label>
-			<div class="ui icon input">
-				<input type="password" name="password" />
-				<i class="lock icon"></i>
-			</div>
-		</div>
-		<button type="submit" class="ui primary button">{{ t('login') }}</button>
-	</form>
+        <form action="{{ siteUrl(urlFor('login')) }}" method="post" class="form-login">
+
+          {% if flash.loginerror %}
+            <div class="alert alert-warning">{{ t('invalid-login-or-password') }}</div>
+          {% endif %}
+
+          <input type="text" name="username" class="form-control" placeholder="{{ t('user') }}" autofocus required />
+          <input type="password" name="password" class="form-control" placeholder="{{ t('password') }}" required />
+          <button type="submit" class="btn btn-block btn-success">{{ t('login') }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

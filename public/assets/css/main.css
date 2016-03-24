@@ -1,0 +1,26 @@
+@import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css");
+
+.widget {
+    margin: 0 0 5px 0;
+    display: block;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+}
+.widget .widget-heading {
+    padding: 3px 15px;
+    border-radius: 2px 2px 0 0;
+    text-align: center;
+    background: #AAAAAA;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.widget .widget-body {
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: 300;
+    background: #FFF;
+    text-align: center;
+}
