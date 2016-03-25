@@ -38,6 +38,7 @@ class Configuration
 
 	public function setupGlobal($app)
 	{
+		date_default_timezone_set('America/Sao_Paulo');
 		// initialize the Facade class
 		Facade::setFacadeApplication($app);
 		Facade::registerAliases();
