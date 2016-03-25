@@ -44,5 +44,10 @@
     });
   });
 
-  $(document).on('click', '.remove-button');
+  $(document).on('click', '.remove-button', $.noop);
+
+  $(document).on('click', '#add-entrance', $.noop);
+
+  $(document).on('click', '#add-out', $.noop);
+
 }(window.jQuery, window.bootbox, window.Mustache));
