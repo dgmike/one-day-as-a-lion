@@ -1,18 +1,14 @@
-(function ($, bootbox, Mustache) {
-  "use strict";
+(function($, bootbox, Mustache) {
+  'use strict';
 
-  var render = function (templateName, data) {
+  var render = function(templateName, data) {
     var template = $('#template-' + templateName).html();
-    data.selected = function () {
-      return function (text, render) {
-        var textData, key, value, currentValue;
 
-        textData = render(text).split(',');
-        key = textData[0];
-        value = textData[1];
-        currentValue = textData[2];
+    data.selected = function() {
+      return function(text, render) {
+        var textData = render(text).split(',');
 
-        if (value == currentValue) {
+        if (textData[0] == textData[1]) {
           return 'selected="selected"';
         }
       };
@@ -20,16 +16,31 @@
     return Mustache.render(template, data);
   };
 
-  $(document).on('click', '.edit-button', function (event) {
+  $(document).on('click', '.commit-button:not(.disabled)', function(event) {
+    event.preventDefault();
+
+    bootbox.dialog({
+      'title': 'Confirmar',
+      'message': render('check_dialog', $(this).parents('tr').data()),
+      'buttons': {
+        'Cancelar': function() {},
+        'Confirmar': function() {}
+      }
+    });
+  });
+
+  $(document).on('click', '.edit-button', function(event) {
     event.preventDefault();
 
     bootbox.dialog({
       'title': 'Editar registro',
       'message': render('edit_dialog', $(this).parents('tr').data()),
       'buttons': {
-        'Cancelar': function () {},
-        'Salvar': function () {},
+        'Cancelar': function() {},
+        'Salvar': function() {},
       }
     });
   });
+
+  $(document).on('click', '.remove-button');
 }(window.jQuery, window.bootbox, window.Mustache));
