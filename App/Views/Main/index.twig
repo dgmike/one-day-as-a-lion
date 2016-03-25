@@ -54,3 +54,14 @@
   </div>
 </div>
 {% endblock %}
+
+
+{% block footer %}
+  {% for item in ['edit_dialog'] %}
+
+    <script id="{{ 'template-' ~ item }}" type="x-tmpl-mustache">
+      {%- include 'Main/_' ~ item ~ '.mustache.twig' %}
+    </script>
+
+  {% endfor %}
+{% endblock %}

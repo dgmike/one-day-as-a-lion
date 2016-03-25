@@ -1,0 +1,20 @@
+{% macro input(name, label, value, type = 'text') -%}
+        <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
+        <div class="col-sm-9">
+            <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control" id="{{ 'form_' ~ name }}" />
+        </div>
+{%- endmacro %}
+
+{% macro number(name, label, value) %}{{ _self.input(name, label, value, 'number') }}{% endmacro %}
+
+{% macro select(name, options, label) %}
+        <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
+        <div class="col-sm-9">
+            <select name="{{ name }}" class="form-control">
+                {% for option in options -%}
+                    <option value="{{ option[0] }}" {{ '{{#selected}}' ~ name ~ ',' ~ option[0] ~ ',{{' ~ name ~ '}}{{/selected}}' }}>{{ t(option[1]) }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+{% endmacro %}
