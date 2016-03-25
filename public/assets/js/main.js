@@ -24,7 +24,7 @@
       'message': render('check_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
-        'Cancelar': $.noop(),
+        'Cancelar': $.noop,
         'Confirmar': function() {}
       }
     });
@@ -38,7 +38,7 @@
       'message': render('edit_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
-        'Cancelar': $.noop(),
+        'Cancelar': $.noop,
         'Salvar': function() {},
       }
     });
