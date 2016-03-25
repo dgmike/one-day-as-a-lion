@@ -20,7 +20,7 @@
     event.preventDefault();
 
     bootbox.dialog({
-      'title': 'Confirmar',
+      'title': i18n._('commit-transaction'),
       'message': render('check_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
@@ -34,7 +34,7 @@
     event.preventDefault();
 
     bootbox.dialog({
-      'title': 'Editar registro',
+      'title': i18n._('edit'),
       'message': render('edit_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {

@@ -37,6 +37,7 @@ $lang['not-defined'] = 'não definido';
 $lang['commited'] = 'já aconteceu';
 $lang['not-commited'] = 'ainda não aconteceu';
 $lang['commit'] = 'efetuar';
+$lang['edit'] = 'editar';
 
 $lang['import'] = 'Importar';
 $lang['confirm-import'] = 'Tem certeza que deseja importar os dados do mês anterior, eles serão mesclados aos dados deste mês.';
