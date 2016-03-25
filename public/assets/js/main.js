@@ -22,6 +22,7 @@
     bootbox.dialog({
       'title': 'Confirmar',
       'message': render('check_dialog', $(this).parents('tr').data()),
+      'onEscape': true,
       'buttons': {
         'Cancelar': function() {},
         'Confirmar': function() {}
@@ -35,6 +36,7 @@
     bootbox.dialog({
       'title': 'Editar registro',
       'message': render('edit_dialog', $(this).parents('tr').data()),
+      'onEscape': true,
       'buttons': {
         'Cancelar': function() {},
         'Salvar': function() {},
