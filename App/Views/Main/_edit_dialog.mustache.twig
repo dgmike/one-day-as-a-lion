@@ -1,20 +1,20 @@
 
 {% import 'Main/_form_macros.twig' as form %}
 
-<form action="#" class="form-horizontal">
+<form action="#" class="form-horizontal" method="post">
     <div class="form-group">
-        {{ form.number('day') }}
+        {{ form.day('day', null, 'required') }}
     </div>
     <div class="form-group">
-        {{ form.input('description') }}
+        {{ form.input('description', null, null, 'text', 'required') }}
     </div>
     <div class="form-group">
-        {{ form.money('estimated', t('estimated-amount')) }}
+        {{ form.money('estimated', t('estimated-amount'), null, 'required') }}
     </div>
     <div class="form-group">
         {{ form.money('real', t('real-amount')) }}
     </div>
     <div class="form-group">
-        {{ form.select('status', [['1', 'not-commited'], ['2', 'commited']]) }}
+        {{ form.select('status', [['1', 'not-commited'], ['2', 'commited']], null, 'required') }}
     </div>
 </form>

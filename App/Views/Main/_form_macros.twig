@@ -1,26 +1,28 @@
-{% macro input(name, label, value, type = 'text') -%}
+{% macro input(name, label, value, type = 'text', extra = '') -%}
         <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
         <div class="col-sm-9">
-            <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control" id="{{ 'form_' ~ name }}" />
+            <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control" id="{{ 'form_' ~ name }}" {{ extra|raw }} />
         </div>
 {%- endmacro %}
 
-{% macro money(name, label, value, type = 'number') -%}
+{% macro money(name, label, value, extra, type = 'number') -%}
         <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
         <div class="col-sm-9">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">{{ t('currency-prefix') }}</span>
-                <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control" id="{{ 'form_' ~ name }}" />
+                <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control money" id="{{ 'form_' ~ name }}" {{ extra|raw }} />
             </div>
         </div>
 {%- endmacro %}
 
-{% macro number(name, label, value) %}{{ _self.input(name, label, value, 'number') }}{% endmacro %}
+{% macro number(name, label, value, extra) %}{{ _self.input(name, label, value, 'number', extra) }}{% endmacro %}
 
-{% macro select(name, options, label) %}
+{% macro day(name, value, extra = '') %}{{ _self.input(name, t('day'), value, 'number', 'min="1" max="31" ' ~ extra) }}{% endmacro %}
+
+{% macro select(name, options, label, extra = '') -%}
         <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
         <div class="col-sm-9">
-            <select name="{{ name }}" class="form-control">
+            <select name="{{ name }}" class="form-control" {{ extra }}>
                 {% for option in options -%}
                     <option value="{{ option[0] }}" {{ '{{#selected}}' ~ option[0] ~ ',{{' ~ name ~ '}}{{/selected}}' }}>{{ t(option[1]) }}</option>
                 {% endfor %}
