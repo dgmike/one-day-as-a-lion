@@ -2,15 +2,7 @@
   'use strict';
 
   var maskMoney;
-
-  maskMoney = function() {
-    $('input.money').each(function() {
-      $(this)
-      .attr('type', 'text')
-      .maskMoney({'allowZero': true})
-      .maskMoney('mask');
-    });
-  };
+  var render;
 
   $.fn.serializeWrap = function(wrapper) {
     var zeroObj = () => Object.create(null);
@@ -35,7 +27,16 @@
     return result;
   };
 
-  var render = function(templateName, data) {
+  maskMoney = function() {
+    $('input.money').each(function() {
+      $(this)
+      .attr('type', 'text')
+      .maskMoney({'allowZero': true})
+      .maskMoney('mask');
+    });
+  };
+
+  render = function(templateName, data) {
     var template = $('#template-' + templateName).html();
 
     data.selected = function() {
