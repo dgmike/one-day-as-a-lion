@@ -7,3 +7,4 @@ vendor/
 public/components/
 App/Configuration/database.ini.php
 App/Configuration/*.ini
+database.sqlite
