@@ -58,7 +58,7 @@
 			<i class="plus icon"></i> {{ t('add-entrance') }}
 		</a>
 	</h2>
-    {{ include('shared/results.twig', {entries: entrances, sums: sums.entrance}) }}
+    {{ include('shared/results.twig', {entries: entrances, sums: sums.entrance, type: 'add'}) }}
 {% endblock %}
 
 {% block out %}
@@ -69,7 +69,7 @@
 		</a>
 	</h2>
 
-    {{ include('shared/results.twig', {entries: outs, sums: sums.out}) }}
+    {{ include('shared/results.twig', {entries: outs, sums: sums.out, type: 'remove'}) }}
 {% endblock %}
 
 {% block header %}
