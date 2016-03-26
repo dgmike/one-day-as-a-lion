@@ -1,4 +1,4 @@
-(function($, bootbox, Mustache) {
+(function($, bootbox, Mustache, location, i18n) {
   'use strict';
 
   var maskMoney;
@@ -7,9 +7,7 @@
     $('input.money').each(function() {
       $(this)
       .attr('type', 'text')
-      .maskMoney({
-        'allowZero': true
-      })
+      .maskMoney({'allowZero': true})
       .maskMoney('mask');
     });
   };
@@ -54,6 +52,7 @@
 
   $(document).on('click', '.commit-button:not(.disabled)', function(event) {
     var formData = $(this).parents('tr').data();
+    var fv;
     event.preventDefault();
 
     bootbox.dialog({
@@ -77,15 +76,15 @@
             data.commit.id = formData.id;
             data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
             data.commit.status = 2;
-            $.post(window.location.pathname, data, function() {
-              window.location.reload();
+            $.post(location.pathname, data, function() {
+              location.reload();
             });
           }
         }
       }
     });
     maskMoney();
-    var fv = $('form').formValidation({
+    fv = $('form').formValidation({
       'framework': 'bootstrap',
       'locale': 'pt_BR'
     });
@@ -93,6 +92,7 @@
 
   $(document).on('click', '.edit-button', function(event) {
     var formData = $(this).parents('tr').data();
+    var fv;
     event.preventDefault();
 
     bootbox.dialog({
@@ -115,15 +115,15 @@
             data._METHOD = 'patch';
             data.entrance.edit.id = formData.id;
             data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
-            $.post(window.location.pathname, data, function() {
-              window.location.reload();
+            $.post(location.pathname, data, function() {
+              location.reload();
             });
           }
         }
       }
     });
     maskMoney();
-    var fv = $('form').formValidation({
+    fv = $('form').formValidation({
       'framework': 'bootstrap',
       'locale': 'pt_BR'
     });
@@ -131,6 +131,7 @@
 
   $(document).on('click', '.remove-button', function(event) {
     var formData = $(this).parents('tr').data();
+    var fv;
     event.preventDefault();
 
     bootbox.dialog({
@@ -152,15 +153,15 @@
             var data = form.serializeWrap('');
             data._METHOD = 'delete';
             data.id = formData.id;
-            $.post(window.location.pathname, data, function() {
-              window.location.reload();
+            $.post(location.pathname, data, function() {
+              location.reload();
             });
           }
         }
       }
     });
     maskMoney();
-    var fv = $('form').formValidation({
+    fv = $('form').formValidation({
       'framework': 'bootstrap',
       'locale': 'pt_BR'
     });
@@ -168,6 +169,7 @@
 
   $(document).on('click', '#add-entrance', function(event) {
     var formData = $(this).parents('tr').data();
+    var fv;
     event.preventDefault();
 
     bootbox.dialog({
@@ -187,15 +189,15 @@
             }
             var form = $('.bootbox form');
             var data = form.serializeWrap('entrance.add');
-            $.post(window.location.pathname, data, function() {
-              window.location.reload();
+            $.post(location.pathname, data, function() {
+              location.reload();
             });
           }
         }
       }
     });
     maskMoney();
-    var fv = $('form').formValidation({
+    fv = $('form').formValidation({
       'framework': 'bootstrap',
       'locale': 'pt_BR'
     });
@@ -203,6 +205,7 @@
 
   $(document).on('click', '#add-out', function(event) {
     var formData = $(this).parents('tr').data();
+    var fv;
     event.preventDefault();
 
     bootbox.dialog({
@@ -222,18 +225,17 @@
             }
             var form = $('.bootbox form');
             var data = form.serializeWrap('entrance.remove');
-            $.post(window.location.pathname, data, function() {
-              window.location.reload();
+            $.post(location.pathname, data, function() {
+              location.reload();
             });
           }
         }
       }
     });
     maskMoney();
-    var fv = $('form').formValidation({
+    fv = $('form').formValidation({
       'framework': 'bootstrap',
       'locale': 'pt_BR'
     });
   });
-
-}(window.jQuery, window.bootbox, window.Mustache));
+}(window.jQuery, window.bootbox, window.Mustache, window.i18n));
