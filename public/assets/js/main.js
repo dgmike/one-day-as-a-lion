@@ -72,7 +72,9 @@
           data.commit.id = formData.id;
           data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
           data.commit.status = 2;
-          $.post(window.location.pathname, data);
+          $.post(window.location.pathname, data, function() {
+            window.location.reload();
+          });
         }
       }
     });
@@ -102,7 +104,9 @@
           data._METHOD = 'patch';
           data.entrance.edit.id = formData.id;
           data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
-          $.post(window.location.pathname, data);
+          $.post(window.location.pathname, data, function() {
+            window.location.reload();
+          });
         }
       }
     });
@@ -131,7 +135,9 @@
           var data = form.serializeWrap('');
           data._METHOD = 'delete';
           data.id = formData.id;
-          $.post(window.location.pathname, data);
+          $.post(window.location.pathname, data, function() {
+            window.location.reload();
+          });
         }
       }
     });
@@ -158,7 +164,9 @@
           }
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.add');
-          $.post(window.location.pathname, data);
+          $.post(window.location.pathname, data, function() {
+            window.location.reload();
+          });
         }
       }
     });
@@ -185,7 +193,9 @@
           }
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.remove');
-          $.post(window.location.pathname, data);
+          $.post(window.location.pathname, data, function() {
+            window.location.reload();
+          });
         }
       }
     });
