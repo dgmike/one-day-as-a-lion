@@ -61,8 +61,8 @@
       'message': render('check_dialog', formData),
       'onEscape': true,
       'buttons': {
-        'Cancelar': $.noop,
-        'Confirmar': function() {
+        'cancel': $.noop,
+        'ok': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('commit');
           data._METHOD = 'put';
@@ -74,6 +74,10 @@
       }
     });
     maskMoney();
+    var fv = $('form').formValidation({
+      'framework': 'bootstrap',
+      'locale': 'pt_BR'
+    });
   });
 
   $(document).on('click', '.edit-button', function(event) {
@@ -85,8 +89,8 @@
       'message': render('edit_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
-        'Cancelar': $.noop,
-        'Salvar': function() {
+        'cancel': $.noop,
+        'ok': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.edit');
           data._METHOD = 'patch';
@@ -97,6 +101,10 @@
       }
     });
     maskMoney();
+    var fv = $('form').formValidation({
+      'framework': 'bootstrap',
+      'locale': 'pt_BR'
+    });
   });
 
   $(document).on('click', '.remove-button', function(event) {
@@ -119,6 +127,10 @@
       }
     });
     maskMoney();
+    var fv = $('form').formValidation({
+      'framework': 'bootstrap',
+      'locale': 'pt_BR'
+    });
   });
 
   $(document).on('click', '#add-entrance', function(event) {
@@ -139,6 +151,10 @@
       }
     });
     maskMoney();
+    var fv = $('form').formValidation({
+      'framework': 'bootstrap',
+      'locale': 'pt_BR'
+    });
   });
 
   $(document).on('click', '#add-out', function(event) {
@@ -159,6 +175,10 @@
       }
     });
     maskMoney();
+    var fv = $('form').formValidation({
+      'framework': 'bootstrap',
+      'locale': 'pt_BR'
+    });
   });
 
 }(window.jQuery, window.bootbox, window.Mustache));

@@ -3,9 +3,9 @@
 
 <form action="#" class="form-horizontal">
     <div class="form-group">
-        {{ form.day('day') }}
+        {{ form.day('day', null, 'required') }}
     </div>
     <div class="form-group">
-        {{ form.money('real', t('real-amount')) }}
+        {{ form.money('real', t('real-amount'), null, 'required') }}
     </div>
 </form>
