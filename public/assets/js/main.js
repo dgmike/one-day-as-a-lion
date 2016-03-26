@@ -63,6 +63,9 @@
       'buttons': {
         'cancel': $.noop,
         'ok': function() {
+          if (!$('form').data('formValidation').validate().isValid()) {
+            return false;
+          }
           var form = $('.bootbox form');
           var data = form.serializeWrap('commit');
           data._METHOD = 'put';
@@ -91,6 +94,9 @@
       'buttons': {
         'cancel': $.noop,
         'ok': function() {
+          if (!$('form').data('formValidation').validate().isValid()) {
+            return false;
+          }
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.edit');
           data._METHOD = 'patch';
@@ -118,6 +124,9 @@
       'buttons': {
         'cancel': $.noop,
         'ok': function() {
+          if (!$('form').data('formValidation').validate().isValid()) {
+            return false;
+          }
           var form = $('.bootbox form');
           var data = form.serializeWrap('');
           data._METHOD = 'delete';
@@ -144,6 +153,9 @@
       'buttons': {
         'cancel': $.noop,
         'ok': function() {
+          if (!$('form').data('formValidation').validate().isValid()) {
+            return false;
+          }
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.add');
           $.post(window.location.pathname, data);
@@ -168,6 +180,9 @@
       'buttons': {
         'cancel': $.noop,
         'ok': function() {
+          if (!$('form').data('formValidation').validate().isValid()) {
+            return false;
+          }
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.remove');
           $.post(window.location.pathname, data);
