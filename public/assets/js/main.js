@@ -1,6 +1,19 @@
 (function($, bootbox, Mustache) {
   'use strict';
 
+  var maskMoney;
+
+  maskMoney = function() {
+    $('input.money').each(function() {
+      $(this)
+      .attr('type', 'text')
+      .maskMoney({
+        'allowZero': true
+      })
+      .maskMoney('mask');
+    });
+  };
+
   $.fn.serializeWrap = function(wrapper) {
     var zeroObj = () => Object.create(null);
     var value;
@@ -52,16 +65,15 @@
         'Confirmar': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('commit');
-
           data._METHOD = 'put';
           data.commit.id = formData.id;
           data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
           data.commit.status = 2;
-
           $.post(window.location.pathname, data);
         }
       }
     });
+    maskMoney();
   });
 
   $(document).on('click', '.edit-button', function(event) {
@@ -77,15 +89,14 @@
         'Salvar': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.edit');
-
           data._METHOD = 'patch';
           data.entrance.edit.id = formData.id;
           data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
-
           $.post(window.location.pathname, data);
-        },
+        }
       }
     });
+    maskMoney();
   });
 
   $(document).on('click', '.remove-button', function(event) {
@@ -101,14 +112,13 @@
         'ok': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('');
-
           data._METHOD = 'delete';
           data.id = formData.id;
-
           $.post(window.location.pathname, data);
         }
       }
     });
+    maskMoney();
   });
 
   $(document).on('click', '#add-entrance', function(event) {
@@ -124,11 +134,11 @@
         'ok': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.add');
-
           $.post(window.location.pathname, data);
         }
       }
     });
+    maskMoney();
   });
 
   $(document).on('click', '#add-out', function(event) {
@@ -144,11 +154,11 @@
         'ok': function() {
           var form = $('.bootbox form');
           var data = form.serializeWrap('entrance.remove');
-
           $.post(window.location.pathname, data);
         }
       }
     });
+    maskMoney();
   });
 
 }(window.jQuery, window.bootbox, window.Mustache));
