@@ -7,6 +7,10 @@
 
 {% block current_data_title %}{{ currentLinkData.month }}/{{ currentLinkData.year }}{% endblock %}
 
+{% block current_button %}
+  <a href="javascript:return void(0);">{{ currentLinkData.month }}/{{ currentLinkData.year }}</a>
+{% endblock %}
+
 {% block previous_button %}
 	<a href="{{ siteUrl(urlFor('main', previousLinkData)) }}">{{ previousLinkData.month }}/{{ previousLinkData.year }}</a>
 {% endblock %}
