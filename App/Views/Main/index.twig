@@ -57,7 +57,7 @@
 
 
 {% block footer %}
-  {% for item in ['edit_dialog', 'check_dialog'] %}
+  {% for item in ['edit_dialog', 'check_dialog', 'remove_dialog'] %}
 
     <script id="{{ 'template-' ~ item }}" type="x-tmpl-mustache">
       {%- include 'Main/_' ~ item ~ '.mustache.twig' %}

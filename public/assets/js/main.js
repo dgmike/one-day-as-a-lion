@@ -88,7 +88,28 @@
     });
   });
 
-  $(document).on('click', '.remove-button', $.noop);
+  $(document).on('click', '.remove-button', function(event) {
+    var formData = $(this).parents('tr').data();
+    event.preventDefault();
+
+    bootbox.dialog({
+      'title': i18n._('remove'),
+      'message': render('remove_dialog', $(this).parents('tr').data()),
+      'onEscape': true,
+      'buttons': {
+        'cancel': $.noop,
+        'ok': function() {
+          var form = $('.bootbox form');
+          var data = form.serializeWrap('entrance.edit');
+
+          data._METHOD = 'delete';
+          data.id = formData.id;
+
+          $.post(window.location.pathname, data);
+        }
+      }
+    });
+  });
 
   $(document).on('click', '#add-entrance', $.noop);
 
