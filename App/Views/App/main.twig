@@ -85,14 +85,12 @@
       jQuery.fn.bootstrapTable.defaults.striped = true;
       jQuery.fn.bootstrapTable.defaults.search = true;
       jQuery.fn.bootstrapTable.defaults.showHeader = true;
-      jQuery.fn.bootstrapTable.defaults.showColumns = true;
       jQuery.fn.bootstrapTable.defaults.showToggle = true;
       jQuery.fn.bootstrapTable.defaults.sortable = true;
-
-      i18n({{ translations()|raw }});
     </script>
     <script src="/public/assets/js/bootstrap-table-locale-all.min.js"></script>
 
+    <script>window.i18n({{ translations()|raw }});</script>
     <script src="/public/assets/js/main.js"></script>
 
   </body>
