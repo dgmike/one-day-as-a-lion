@@ -102,8 +102,8 @@ class Main
 		} elseif (array_key_exists('remove', $entrance) && is_array($entrance['remove'])) {
 			$remove = (object) $entrance['remove'];
 			$remove->type = 'remove';
-			$add->estimated = (abs($add->estimated) * -1);
-			$add->real = $add->real ? (abs($add->real) * -1) : null;
+			$remove->estimated = (abs($remove->estimated) * -1);
+			$remove->real = $remove->real ? (abs($remove->real) * -1) : null;
 			$remove->year = $year;
 			$remove->month = $month;
 			self::save($entry, $remove);

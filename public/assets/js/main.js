@@ -116,7 +116,7 @@
     event.preventDefault();
 
     bootbox.dialog({
-      'title': i18n._('remove'),
+      'title': i18n._('add-entrance'),
       'message': render('edit_dialog', {}),
       'onEscape': true,
       'buttons': {
@@ -131,6 +131,24 @@
     });
   });
 
-  $(document).on('click', '#add-out', $.noop);
+  $(document).on('click', '#add-out', function(event) {
+    var formData = $(this).parents('tr').data();
+    event.preventDefault();
+
+    bootbox.dialog({
+      'title': i18n._('add-out'),
+      'message': render('edit_dialog', {}),
+      'onEscape': true,
+      'buttons': {
+        'cancel': $.noop,
+        'ok': function() {
+          var form = $('.bootbox form');
+          var data = form.serializeWrap('entrance.remove');
+
+          $.post(window.location.pathname, data);
+        }
+      }
+    });
+  });
 
 }(window.jQuery, window.bootbox, window.Mustache));
