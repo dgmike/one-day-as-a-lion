@@ -61,20 +61,26 @@
       'message': render('check_dialog', formData),
       'onEscape': true,
       'buttons': {
-        'cancel': $.noop,
-        'ok': function() {
-          if (!$('form').data('formValidation').validate().isValid()) {
-            return false;
+        'cancel': {
+          'label': i18n._('cancel'),
+          'callback': $.noop
+        },
+        'ok': {
+          'label': i18n._('ok'),
+          'callback': function() {
+            if (!$('form').data('formValidation').validate().isValid()) {
+              return false;
+            }
+            var form = $('.bootbox form');
+            var data = form.serializeWrap('commit');
+            data._METHOD = 'put';
+            data.commit.id = formData.id;
+            data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
+            data.commit.status = 2;
+            $.post(window.location.pathname, data, function() {
+              window.location.reload();
+            });
           }
-          var form = $('.bootbox form');
-          var data = form.serializeWrap('commit');
-          data._METHOD = 'put';
-          data.commit.id = formData.id;
-          data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
-          data.commit.status = 2;
-          $.post(window.location.pathname, data, function() {
-            window.location.reload();
-          });
         }
       }
     });
@@ -94,19 +100,25 @@
       'message': render('edit_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
-        'cancel': $.noop,
-        'ok': function() {
-          if (!$('form').data('formValidation').validate().isValid()) {
-            return false;
+        'cancel': {
+          'label': i18n._('cancel'),
+          'callback': $.noop
+        },
+        'ok': {
+          'label': i18n._('ok'),
+          'callback': function() {
+            if (!$('form').data('formValidation').validate().isValid()) {
+              return false;
+            }
+            var form = $('.bootbox form');
+            var data = form.serializeWrap('entrance.edit');
+            data._METHOD = 'patch';
+            data.entrance.edit.id = formData.id;
+            data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
+            $.post(window.location.pathname, data, function() {
+              window.location.reload();
+            });
           }
-          var form = $('.bootbox form');
-          var data = form.serializeWrap('entrance.edit');
-          data._METHOD = 'patch';
-          data.entrance.edit.id = formData.id;
-          data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
-          $.post(window.location.pathname, data, function() {
-            window.location.reload();
-          });
         }
       }
     });
@@ -126,18 +138,24 @@
       'message': render('remove_dialog', $(this).parents('tr').data()),
       'onEscape': true,
       'buttons': {
-        'cancel': $.noop,
-        'ok': function() {
-          if (!$('form').data('formValidation').validate().isValid()) {
-            return false;
+        'cancel': {
+          'label': i18n._('cancel'),
+          'callback': $.noop
+        },
+        'ok': {
+          'label': i18n._('ok'),
+          'callback': function() {
+            if (!$('form').data('formValidation').validate().isValid()) {
+              return false;
+            }
+            var form = $('.bootbox form');
+            var data = form.serializeWrap('');
+            data._METHOD = 'delete';
+            data.id = formData.id;
+            $.post(window.location.pathname, data, function() {
+              window.location.reload();
+            });
           }
-          var form = $('.bootbox form');
-          var data = form.serializeWrap('');
-          data._METHOD = 'delete';
-          data.id = formData.id;
-          $.post(window.location.pathname, data, function() {
-            window.location.reload();
-          });
         }
       }
     });
@@ -157,16 +175,22 @@
       'message': render('edit_dialog', {}),
       'onEscape': true,
       'buttons': {
-        'cancel': $.noop,
-        'ok': function() {
-          if (!$('form').data('formValidation').validate().isValid()) {
-            return false;
+        'cancel': {
+          'label': i18n._('cancel'),
+          'callback': $.noop
+        },
+        'ok': {
+          'label': i18n._('ok'),
+          'callback': function() {
+            if (!$('form').data('formValidation').validate().isValid()) {
+              return false;
+            }
+            var form = $('.bootbox form');
+            var data = form.serializeWrap('entrance.add');
+            $.post(window.location.pathname, data, function() {
+              window.location.reload();
+            });
           }
-          var form = $('.bootbox form');
-          var data = form.serializeWrap('entrance.add');
-          $.post(window.location.pathname, data, function() {
-            window.location.reload();
-          });
         }
       }
     });
@@ -186,16 +210,22 @@
       'message': render('edit_dialog', {}),
       'onEscape': true,
       'buttons': {
-        'cancel': $.noop,
-        'ok': function() {
-          if (!$('form').data('formValidation').validate().isValid()) {
-            return false;
+        'cancel': {
+          'label': i18n._('cancel'),
+          'callback': $.noop
+        },
+        'ok': {
+          'label': i18n._('ok'),
+          'callback': function() {
+            if (!$('form').data('formValidation').validate().isValid()) {
+              return false;
+            }
+            var form = $('.bootbox form');
+            var data = form.serializeWrap('entrance.remove');
+            $.post(window.location.pathname, data, function() {
+              window.location.reload();
+            });
           }
-          var form = $('.bootbox form');
-          var data = form.serializeWrap('entrance.remove');
-          $.post(window.location.pathname, data, function() {
-            window.location.reload();
-          });
         }
       }
     });
