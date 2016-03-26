@@ -100,7 +100,7 @@
         'cancel': $.noop,
         'ok': function() {
           var form = $('.bootbox form');
-          var data = form.serializeWrap('entrance.edit');
+          var data = form.serializeWrap('');
 
           data._METHOD = 'delete';
           data.id = formData.id;
@@ -111,7 +111,25 @@
     });
   });
 
-  $(document).on('click', '#add-entrance', $.noop);
+  $(document).on('click', '#add-entrance', function(event) {
+    var formData = $(this).parents('tr').data();
+    event.preventDefault();
+
+    bootbox.dialog({
+      'title': i18n._('remove'),
+      'message': render('edit_dialog', {}),
+      'onEscape': true,
+      'buttons': {
+        'cancel': $.noop,
+        'ok': function() {
+          var form = $('.bootbox form');
+          var data = form.serializeWrap('entrance.add');
+
+          $.post(window.location.pathname, data);
+        }
+      }
+    });
+  });
 
   $(document).on('click', '#add-out', $.noop);
 
