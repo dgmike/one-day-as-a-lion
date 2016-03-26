@@ -5,6 +5,16 @@
         </div>
 {%- endmacro %}
 
+{% macro money(name, label, value, type = 'number') -%}
+        <label for="{{ 'form_' ~ name }}" class="col-sm-3 control-label">{{ label ? label : t(name) }}</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">{{ t('currency-prefix') }}</span>
+                <input type="{{ type }}" name="{{ name }}" value="{{ value|default('{{ ' ~ name ~ ' }}') }}" class="form-control" id="{{ 'form_' ~ name }}" />
+            </div>
+        </div>
+{%- endmacro %}
+
 {% macro number(name, label, value) %}{{ _self.input(name, label, value, 'number') }}{% endmacro %}
 
 {% macro select(name, options, label) %}

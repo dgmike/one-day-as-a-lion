@@ -20,37 +20,11 @@
 {% endblock %}
 
 {% block entrance %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ t('entrance') }}
-                    <a href="#" id="add-entrance" class="btn btn-default btn-xs pull-right">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        {{ t('add-entrance') }}
-                    </a>
-                </div>
-                {{ include('shared/results.twig', { entries: entrances, sums: sums.entrance }) }}
-            </div>
-        </div>
-    </div>
+    {{ include('Main/_entrance_area.twig', { title: t('entrance'), entries: entrances, sums: sums.entrance, link: 'add-entrance' }) }}
 {% endblock %}
 
 {% block out %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ t('out') }}
-                    <a href="#" id="add-out" class="btn btn-default btn-xs pull-right">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        {{ t('add-out') }}
-                    </a>
-                </div>
-                {{ include('shared/results.twig', { entries: outs, sums: sums.out }) }}
-            </div>
-        </div>
-    </div>
+    {{ include('Main/_entrance_area.twig', { title: t('out'), entries: outs, sums: sums.out, link: 'add-out' }) }}
 {% endblock %}
 
 

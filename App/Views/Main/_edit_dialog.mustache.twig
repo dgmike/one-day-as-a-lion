@@ -9,10 +9,10 @@
         {{ form.input('description') }}
     </div>
     <div class="form-group">
-        {{ form.number('estimated', t('estimated-amount')) }}
+        {{ form.money('estimated', t('estimated-amount')) }}
     </div>
     <div class="form-group">
-        {{ form.number('real', t('real-amount')) }}
+        {{ form.money('real', t('real-amount')) }}
     </div>
     <div class="form-group">
         {{ form.select('status', [['1', 'not-commited'], ['2', 'commited']]) }}
