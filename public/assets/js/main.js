@@ -1,6 +1,7 @@
 (function($, bootbox, Mustache, location, i18n) {
   'use strict';
 
+  var action;
   var maskMoney;
   var render;
 
@@ -51,192 +52,126 @@
     return Mustache.render(template, data);
   };
 
-  $(document).on('click', '.commit-button:not(.disabled)', function(event) {
-    var formData = $(this).parents('tr').data();
-    var fv;
-    event.preventDefault();
+  action = function(options) {
+    var defaultOptions;
 
-    bootbox.dialog({
-      'title': i18n._('commit-transaction'),
-      'message': render('check_dialog', formData),
-      'onEscape': true,
-      'buttons': {
-        'cancel': {
-          'label': i18n._('cancel'),
-          'callback': $.noop
-        },
-        'ok': {
-          'label': i18n._('ok'),
-          'callback': function() {
-            if (!$('form').data('formValidation').validate().isValid()) {
-              return false;
+    defaultOptions = Object.create(null);
+
+    defaultOptions.filter = (data) => data,
+    defaultOptions.template = '';
+    defaultOptions.title = '';
+    defaultOptions.wrapper = '';
+
+    options = Object.assign(Object.create(null), defaultOptions, options);
+
+    return function(event) {
+      var form;
+      var formData;
+      var fv;
+
+      event.preventDefault();
+
+      formData = $(this).parents('tr').data();
+      bootbox.dialog({
+        'title': i18n._(options.title),
+        'message': render(options.template, formData),
+        'onEscape': true,
+        'buttons': {
+          'cancel': {'label': i18n._('cancel'), 'callback': $.noop},
+          'ok': {
+            'label': i18n._('ok'),
+            'callback': function() {
+              var data;
+
+              if (!$('form').data('formValidation').validate().isValid()) {
+                return false;
+              }
+              data = options.filter(
+                form.serializeWrap(options.wrapper),
+                formData
+              );
+              $.post(location.pathname, data, () => location.reload());
             }
-            var form = $('.bootbox form');
-            var data = form.serializeWrap('commit');
-            data._METHOD = 'put';
-            data.commit.id = formData.id;
-            data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
-            data.commit.status = 2;
-            $.post(location.pathname, data, function() {
-              location.reload();
-            });
           }
         }
-      }
-    });
-    maskMoney();
-    fv = $('form').formValidation({
-      'framework': 'bootstrap',
-      'locale': 'pt_BR'
-    });
-  });
+      });
 
-  $(document).on('click', '.edit-button', function(event) {
-    var formData = $(this).parents('tr').data();
-    var fv;
-    event.preventDefault();
+      maskMoney();
+      form = $('.bootbox form');
+      fv = form.formValidation({
+        'framework': 'bootstrap',
+        'locale': 'pt_BR'
+      });
+    };
+  };
 
-    bootbox.dialog({
-      'title': i18n._('edit'),
-      'message': render('edit_dialog', $(this).parents('tr').data()),
-      'onEscape': true,
-      'buttons': {
-        'cancel': {
-          'label': i18n._('cancel'),
-          'callback': $.noop
-        },
-        'ok': {
-          'label': i18n._('ok'),
-          'callback': function() {
-            if (!$('form').data('formValidation').validate().isValid()) {
-              return false;
-            }
-            var form = $('.bootbox form');
-            var data = form.serializeWrap('entrance.edit');
-            data._METHOD = 'patch';
-            data.entrance.edit.id = formData.id;
-            data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
-            $.post(location.pathname, data, function() {
-              location.reload();
-            });
-          }
-        }
-      }
-    });
-    maskMoney();
-    fv = $('form').formValidation({
-      'framework': 'bootstrap',
-      'locale': 'pt_BR'
-    });
-  });
+  $(document).on(
+    'click',
+    '.commit-button:not(.disabled)',
+    action({
+      'filter': (data, formData) => {
+        data._METHOD = 'put';
+        data.commit.id = formData.id;
+        data.commit.status = 2;
+        data.commit.type = 0 > formData.estimated ? 'remove' : 'add';
+        return data;
+      },
+      'template': 'check_dialog',
+      'title': 'commit-transaction',
+      'wrapper': 'commit',
+    })
+  );
 
-  $(document).on('click', '.remove-button', function(event) {
-    var formData = $(this).parents('tr').data();
-    var fv;
-    event.preventDefault();
+  $(document).on(
+    'click',
+    '.edit-button',
+    action({
+      'filter': (data, formData) => {
+        data._METHOD = 'patch';
+        data.entrance.edit.id = formData.id;
+        data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
+        return data;
+      },
+      'template': 'edit_dialog',
+      'title': 'edit',
+      'wrapper': 'entrance.edit',
+    })
+  );
 
-    bootbox.dialog({
-      'title': i18n._('remove'),
-      'message': render('remove_dialog', $(this).parents('tr').data()),
-      'onEscape': true,
-      'buttons': {
-        'cancel': {
-          'label': i18n._('cancel'),
-          'callback': $.noop
-        },
-        'ok': {
-          'label': i18n._('ok'),
-          'callback': function() {
-            if (!$('form').data('formValidation').validate().isValid()) {
-              return false;
-            }
-            var form = $('.bootbox form');
-            var data = form.serializeWrap('');
-            data._METHOD = 'delete';
-            data.id = formData.id;
-            $.post(location.pathname, data, function() {
-              location.reload();
-            });
-          }
-        }
-      }
-    });
-    maskMoney();
-    fv = $('form').formValidation({
-      'framework': 'bootstrap',
-      'locale': 'pt_BR'
-    });
-  });
+  $(document).on(
+    'click',
+    '.remove-button',
+    action({
+      'filter': (data, formData) => {
+        data._METHOD = 'delete';
+        data.id = formData.id;
+        return data;
+      },
+      'template': 'remove_dialog',
+      'title': 'remove',
+      'wrapper': '',
+    })
+  );
 
-  $(document).on('click', '#add-entrance', function(event) {
-    var formData = $(this).parents('tr').data();
-    var fv;
-    event.preventDefault();
+  $(document).on(
+    'click',
+    '#add-entrance',
+    action({
+      'filter': (data) => data,
+      'template': 'edit_dialog',
+      'title': 'add-entrance',
+      'wrapper': 'entrance.add',
+    })
+  );
 
-    bootbox.dialog({
-      'title': i18n._('add-entrance'),
-      'message': render('edit_dialog', {}),
-      'onEscape': true,
-      'buttons': {
-        'cancel': {
-          'label': i18n._('cancel'),
-          'callback': $.noop
-        },
-        'ok': {
-          'label': i18n._('ok'),
-          'callback': function() {
-            if (!$('form').data('formValidation').validate().isValid()) {
-              return false;
-            }
-            var form = $('.bootbox form');
-            var data = form.serializeWrap('entrance.add');
-            $.post(location.pathname, data, function() {
-              location.reload();
-            });
-          }
-        }
-      }
-    });
-    maskMoney();
-    fv = $('form').formValidation({
-      'framework': 'bootstrap',
-      'locale': 'pt_BR'
-    });
-  });
-
-  $(document).on('click', '#add-out', function(event) {
-    var formData = $(this).parents('tr').data();
-    var fv;
-    event.preventDefault();
-
-    bootbox.dialog({
-      'title': i18n._('add-out'),
-      'message': render('edit_dialog', {}),
-      'onEscape': true,
-      'buttons': {
-        'cancel': {
-          'label': i18n._('cancel'),
-          'callback': $.noop
-        },
-        'ok': {
-          'label': i18n._('ok'),
-          'callback': function() {
-            if (!$('form').data('formValidation').validate().isValid()) {
-              return false;
-            }
-            var form = $('.bootbox form');
-            var data = form.serializeWrap('entrance.remove');
-            $.post(location.pathname, data, function() {
-              location.reload();
-            });
-          }
-        }
-      }
-    });
-    maskMoney();
-    fv = $('form').formValidation({
-      'framework': 'bootstrap',
-      'locale': 'pt_BR'
-    });
-  });
-}(window.jQuery, window.bootbox, window.Mustache, window.i18n));
+  $(document).on(
+    'click',
+    '#add-out',
+    action({
+      'filter': (data) => data,
+      'template': 'edit_dialog',
+      'title': 'add-out',
+      'wrapper': 'entrance.remove',
+    })
+  );
+}(window.jQuery, window.bootbox, window.Mustache, window.location, window.i18n));
