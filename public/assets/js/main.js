@@ -65,6 +65,7 @@
   });
 
   $(document).on('click', '.edit-button', function(event) {
+    var formData = $(this).parents('tr').data();
     event.preventDefault();
 
     bootbox.dialog({
@@ -73,7 +74,16 @@
       'onEscape': true,
       'buttons': {
         'Cancelar': $.noop,
-        'Salvar': function() {},
+        'Salvar': function() {
+          var form = $('.bootbox form');
+          var data = form.serializeWrap('entrance.edit');
+
+          data._METHOD = 'patch';
+          data.entrance.edit.id = formData.id;
+          data.entrance.edit.type = 0 > formData.estimated ? 'remove' : 'add';
+
+          $.post(window.location.pathname, data);
+        },
       }
     });
   });
