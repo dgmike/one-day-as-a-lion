@@ -24,3 +24,15 @@
     background: #FFF;
     text-align: center;
 }
+
+.fixed-table-container {
+    border: 0;
+}
+
+.fixed-table-toolbar {
+    margin: 0 15px;
+}
+
+.fixed-table-body .table {
+    border-top: 1px solid #CCCCCC;
+}
