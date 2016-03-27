@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <title>{{ current_data_title }} - {{ t('title') }}</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css" />
-    <!-- <link rel="stylesheet" href="/public/assets/css/bootstrap-theme.min.css" /> -->
     <link rel="stylesheet" href="/public/assets/css/bootstrap-table.min.css" />
     <link rel="stylesheet" href="/public/assets/css/formValidation.min.css" />
     <link rel="stylesheet" href="/public/assets/css/main.css" />
+
     {% block header %}{% endblock %}
   </head>
   <body>
@@ -68,29 +69,23 @@
 
     {% block footer %}{% endblock %}
 
-    <script src="/public/assets/js/mustache.min.js"></script>
     <script src="/public/assets/js/jquery.min.js"></script>
     <script src="/public/assets/js/bootstrap.min.js"></script>
+
     <script src="/public/assets/js/bootbox.js"></script>
     <script src="/public/assets/js/i18n.js"></script>
     <script src="/public/assets/js/jquery.maskMoney.min.js"></script>
+    <script src="/public/assets/js/mustache.min.js"></script>
 
     <script src="/public/assets/js/formValidation.min.js"></script>
     <script src="/public/assets/js/framework/bootstrap.min.js"></script>
     <script src="/public/assets/js/language/pt_BR.js"></script>
 
     <script src="/public/assets/js/bootstrap-table.min.js"></script>
-    <script>
-      jQuery.fn.bootstrapTable.defaults.locale = 'pt_BR';
-      jQuery.fn.bootstrapTable.defaults.striped = true;
-      jQuery.fn.bootstrapTable.defaults.search = true;
-      jQuery.fn.bootstrapTable.defaults.showHeader = true;
-      jQuery.fn.bootstrapTable.defaults.showToggle = true;
-      jQuery.fn.bootstrapTable.defaults.sortable = true;
-    </script>
     <script src="/public/assets/js/bootstrap-table-locale-all.min.js"></script>
 
     <script>window.i18n({{ translations()|raw }});</script>
+
     <script src="/public/assets/js/main.js"></script>
 
   </body>

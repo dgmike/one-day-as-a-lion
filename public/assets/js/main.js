@@ -5,6 +5,13 @@
   var maskMoney;
   var render;
 
+  $.fn.bootstrapTable.defaults.locale = 'pt_BR';
+  $.fn.bootstrapTable.defaults.striped = true;
+  $.fn.bootstrapTable.defaults.search = true;
+  $.fn.bootstrapTable.defaults.showHeader = true;
+  $.fn.bootstrapTable.defaults.showToggle = true;
+  $.fn.bootstrapTable.defaults.sortable = true;
+
   $.fn.serializeWrap = function(wrapper) {
     var zeroObj = () => Object.create(null);
     var value;
@@ -32,13 +39,15 @@
     $('input.money').each(function() {
       $(this)
       .attr('type', 'text')
-      .maskMoney({'allowZero': true})
+      .maskMoney({'allowZero': true, 'thousands': '.', 'decimal': ','})
       .maskMoney('mask');
     });
   };
 
   render = function(templateName, data) {
     var template = $('#template-' + templateName).html();
+
+    data = data || {};
 
     data.selected = function() {
       return function(text, render) {
@@ -86,6 +95,7 @@
               if (!$('form').data('formValidation').validate().isValid()) {
                 return false;
               }
+
               data = options.filter(
                 form.serializeWrap(options.wrapper),
                 formData
@@ -100,7 +110,33 @@
       form = $('.bootbox form');
       fv = form.formValidation({
         'framework': 'bootstrap',
-        'locale': 'pt_BR'
+        'locale': 'pt_BR',
+        'fields': {
+          'day': {
+            'validators': {
+              'notEmpty': {'enabled': true},
+              'beetween': {'min': 1, 'max': 31}
+            }
+          },
+          'description': {
+            'validators': {
+              'notEmpty': {'enabled': true}
+            }
+          },
+          'estimated': {
+            'validators': {
+              'notEmpty': {'enabled': true},
+              'numeric': {
+                'thousandsseparator': '.',
+                'decimalseparator': ','
+              }//,
+              // 'greaterthan': {
+              //   'value': 0,
+              //   'inclusive': false
+              // }
+            }
+          }
+        }
       });
     };
   };

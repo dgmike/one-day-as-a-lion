@@ -25,6 +25,7 @@
     "font-awesome": "fontawesome#^4.5.0",
     "bootbox.js": "bootbox#^4.4.0",
     "mustache.js": "mustache#^2.2.1",
-    "jquery-maskmoney": "^3.0.2"
+    "jquery-maskmoney": "^3.0.2",
+    "formvalidation.io": "formvalidation/formvalidation.io"
   }
 }
