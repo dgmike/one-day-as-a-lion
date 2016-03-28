@@ -77,6 +77,8 @@
       var form;
       var formData;
       var fv;
+      var validationFieldsConfig;
+      var validationNumericFieldConfig;
 
       event.preventDefault();
 
@@ -106,71 +108,54 @@
         }
       });
 
+      validationNumericFieldConfig = {
+        'trigger': 'keyup blur',
+        'validators': {
+          'notEmpty': {'enabled': true},
+          'numeric': {
+            'thousandsSeparator': '.',
+            'decimalSeparator': ','
+          },
+          'greaterThan': {
+            'transformer': ($field, _validatorName, _validator) => {
+              var val = $field.val();
+              val = (val + '').replace(/\,|\./g, '');
+              val = val / 100;
+              return val;
+            },
+            'value': 0,
+            'inclusive': false
+          }
+        }
+      };
+
+      validationFieldsConfig = {
+        'day': {
+          'validators': {
+            'notEmpty': {'enabled': true},
+            'beetween': {'min': 1, 'max': 31}
+          }
+        },
+        'description': {
+          'validators': {
+            'notEmpty': {'enabled': true}
+          }
+        },
+        'estimated': validationNumericFieldConfig,
+        'real': validationNumericFieldConfig,
+        'status': {
+          'validators': {
+            'notEmpty': {'enabled': true}
+          }
+        }
+      };
+
       maskMoney();
       form = $('.bootbox form');
       fv = form.formValidation({
         'framework': 'bootstrap',
         'locale': 'pt_BR',
-        'fields': {
-          'day': {
-            'validators': {
-              'notEmpty': {'enabled': true},
-              'beetween': {'min': 1, 'max': 31}
-            }
-          },
-          'description': {
-            'validators': {
-              'notEmpty': {'enabled': true}
-            }
-          },
-          'estimated': {
-            'trigger': 'keyup blur',
-            'validators': {
-              'notEmpty': {'enabled': true},
-              'numeric': {
-                'thousandsSeparator': '.',
-                'decimalSeparator': ','
-              },
-              'greaterThan': {
-                'transformer': ($field, _validatorName, _validator) => {
-                  var val = $field.val();
-                  val = (val + '').replace(/\,|\./g, '');
-                  val = val / 100;
-                  return val;
-                },
-                'value': 0,
-                'inclusive': false
-              }
-            }
-          },
-          'real': {
-            'trigger': 'keyup blur',
-            'validators': {
-              'notEmpty': {'enabled': true},
-              'numeric': {
-                'thousandsSeparator': '.',
-                'decimalSeparator': ','
-              },
-              'greaterThan': {
-                'transformer': ($field, _validatorName, _validator) => {
-                  var val = $field.val();
-                  val = (val + '').replace(/\,|\./g, '');
-                  val = val / 100;
-                  return val;
-                },
-                'value': 0,
-                'inclusive': false
-              }
-            }
-          },
-          'status': {
-            'validators': {
-              'notEmpty': {
-                'enabled': true
-              }
-            }
-          }
-        }
+        'fields': validationFieldsConfig
       })
       .on('change', '[name=status]', function() {
         var status = $(this).val();
@@ -180,6 +165,7 @@
         fv.updateOption('real', 'greaterThan', 'inclusive', '2' != status);
         fv.revalidateField('real');
       });
+
       setTimeout(() => $('form select[name="status"]').trigger('change'), 300);
     };
   };
