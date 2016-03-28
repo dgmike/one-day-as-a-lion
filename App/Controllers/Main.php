@@ -92,18 +92,42 @@ class Main
 
 		if (array_key_exists('add', $entrance) && is_array($entrance['add'])) {
 			$add = (object) $entrance['add'];
+
+			if (isset($add->real) && $add->real) {
+				$add->real = preg_replace('/\./', '', $add->real);
+				$add->real = preg_replace('/\,/', '', $add->real);
+				$add->real = number_format($add->real / 100, 2, '.', '');
+			}
+			if (isset($add->estimated) && $add->estimated) {
+				$add->estimated = preg_replace('/\./', '', $add->estimated);
+				$add->estimated = preg_replace('/\,/', '', $add->estimated);
+				$add->estimated = number_format($add->estimated / 100, 2, '.', '');
+			}
+
 			$add->type = 'add';
-			$add->estimated = abs($add->estimated);
-			$add->real = $add->real ? abs($add->real) : null;
+			$add->estimated = number_format(abs($add->estimated), 2, '.', '');
+			$add->real = $add->real ? number_format(abs($add->real), 2, '.', '') : null;
 			$add->year = $year;
 			$add->month = $month;
 			self::save($entry, $add);
 			return;
 		} elseif (array_key_exists('remove', $entrance) && is_array($entrance['remove'])) {
 			$remove = (object) $entrance['remove'];
+
+			if (isset($remove->real) && $remove->real) {
+				$remove->real = preg_replace('/\./', '', $remove->real);
+				$remove->real = preg_replace('/\,/', '', $remove->real);
+				$remove->real = number_format($remove->real / 100, 2, '.', '');
+			}
+			if (isset($remove->estimated) && $remove->estimated) {
+				$remove->estimated = preg_replace('/\./', '', $remove->estimated);
+				$remove->estimated = preg_replace('/\,/', '', $remove->estimated);
+				$remove->estimated = number_format($remove->estimated / 100, 2, '.', '');
+			}
+
 			$remove->type = 'remove';
-			$remove->estimated = (abs($remove->estimated) * -1);
-			$remove->real = $remove->real ? (abs($remove->real) * -1) : null;
+			$remove->estimated = number_format(abs($remove->estimated) * -1, 2, '.', '');
+			$remove->real = $remove->real ? (number_format(abs($remove->real) * -1, 2, '.', '')) : null;
 			$remove->year = $year;
 			$remove->month = $month;
 			self::save($entry, $remove);
