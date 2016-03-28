@@ -197,6 +197,16 @@ class Main
 	static protected function save($entry, \stdClass $data)
 	{
 		try {
+			$data = (object) $data;
+			if (isset($data->real)) {
+				$data->real = preg_replace('/,|\./', '', $data->real);
+				$data->real = $data->real / 100;
+			}
+			if (isset($data->estimated)) {
+				$data->estimated = preg_replace('/,|\./', '', $data->estimated);
+				$data->estimated = $data->estimated / 100;
+			}
+
 			$entry
 				->assign($data)
 				->validate()
