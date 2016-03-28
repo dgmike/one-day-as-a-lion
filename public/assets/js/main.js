@@ -239,4 +239,10 @@
       'wrapper': 'entrance.remove',
     })
   );
-}(window.jQuery, window.bootbox, window.Mustache, window.location, window.i18n));
+}(
+  window.jQuery,
+  window.bootbox,
+  window.Mustache,
+  window.location,
+  window.i18n
+));
