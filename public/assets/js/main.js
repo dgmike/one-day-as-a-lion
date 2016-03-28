@@ -239,6 +239,28 @@
       'wrapper': 'entrance.remove',
     })
   );
+
+  $(document).on(
+    'click',
+    '.import-button',
+    (event) => {
+      event.preventDefault();
+      bootbox.dialog({
+        'title': i18n._('import'),
+        'message': i18n._('confirm-import'),
+        'buttons': {
+          'cancel': {'label': i18n._('cancel'), 'callback': $.noop},
+          'ok': {
+            'label': i18n._('ok'),
+            'callback': function() {
+              var toDate = location.pathname.replace(/[^\d-]/g, '');
+              $.post('/import', {to: toDate}, () => location.reload());
+            }
+          }
+        }
+      });
+    }
+  );
 }(
   window.jQuery,
   window.bootbox,
