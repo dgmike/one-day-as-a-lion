@@ -19,8 +19,8 @@
           data-id="{{ entry.id }}"
           data-day="{{ entry.day }}"
           data-description="{{ entry.description }}"
-          data-estimated="{{ entry.estimated }}"
-          data-real="{{ entry.real }}"
+          data-estimated="{{ entry.estimated|number_format(2, '.', '') }}"
+          data-real="{{ entry.real|number_format(2, '.', '') }}"
           data-status="{{ entry.status }}"
           data-type="{{ entry.type }}"
       >
